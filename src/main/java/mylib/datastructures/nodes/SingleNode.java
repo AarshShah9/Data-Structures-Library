@@ -4,7 +4,7 @@ public class SingleNode {
     private int value;
     private SingleNode next;
 
-    SingleNode(int value) {
+    public SingleNode(int value) {
         this.value = value;
         this.next = null;
     }
