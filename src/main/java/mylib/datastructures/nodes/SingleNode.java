@@ -1,27 +1,27 @@
 package main.java.mylib.datastructures.nodes;
 
-public class SingleNode {
-    private int value;
-    private SingleNode next;
+public class SingleNode<T> {
+    private T value;
+    private SingleNode<T> next;
 
-    public SingleNode(int value) {
+    public SingleNode(T value) {
         this.value = value;
         this.next = null;
     }
 
-    public int getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
-    public SingleNode getNext() {
+    public SingleNode<T> getNext() {
         return next;
     }
 
-    public void setNext(SingleNode next) {
+    public void setNext(SingleNode<T> next) {
         this.next = next;
     }
 }
