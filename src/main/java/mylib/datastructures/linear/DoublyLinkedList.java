@@ -79,6 +79,7 @@ public class DoublyLinkedList<T> {
     public void clear() {
         head = null;
         tail = null;
+        size = 0;
     }
 
 }

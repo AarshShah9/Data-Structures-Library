@@ -2,12 +2,12 @@ package main.java.mylib.datastructures.linear;
 
 import main.java.mylib.datastructures.nodes.SingleNode;
 
-public class SinglyLinkedList<T> {
+public class CircularLinkedList<T> {
 
     private SingleNode<T> head;
     private int size;
 
-    public SinglyLinkedList() {
+    public CircularLinkedList() {
         head = null;
         size = 0;
     }
@@ -22,18 +22,34 @@ public class SinglyLinkedList<T> {
 
     public void insertAtHead(T data) {
         SingleNode<T> newNode = new SingleNode<T>(data);
-        newNode.setNext(head);
-        head = newNode;
+        if (head == null) {
+            head = newNode;
+            head.setNext(head);
+        } else {
+            SingleNode<T> current = head;
+            while (current.getNext() != head) {
+                current = current.getNext();
+            }
+            current.setNext(newNode);
+            newNode.setNext(head);
+            head = newNode;
+        }
         size++;
     }
 
     public void insertAtTail(T data) {
         SingleNode<T> newNode = new SingleNode<T>(data);
-        SingleNode<T> current = head;
-        while (current.getNext() != null) {
-            current = current.getNext();
+        if (head == null) {
+            head = newNode;
+            head.setNext(head);
+        } else {
+            SingleNode<T> current = head;
+            while (current.getNext() != head) {
+                current = current.getNext();
+            }
+            current.setNext(newNode);
+            newNode.setNext(head);
         }
-        current.setNext(newNode);
         size++;
     }
 
