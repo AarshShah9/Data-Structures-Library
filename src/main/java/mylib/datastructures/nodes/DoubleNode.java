@@ -1,37 +1,37 @@
 package main.java.mylib.datastructures.nodes;
 
-public class DoubleNode {
-    private int value;
-    private DoubleNode next;
-    private DoubleNode previous;
+public class DoubleNode<T> {
+    private T value;
+    private DoubleNode<T> next;
+    private DoubleNode<T> previous;
 
-    public DoubleNode(int value) {
+    public DoubleNode(T value) {
         this.value = value;
         this.next = null;
         this.previous = null;
     }
 
-    public int getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
-    public DoubleNode getNext() {
+    public DoubleNode<T> getNext() {
         return next;
     }
 
-    public void setNext(DoubleNode next) {
+    public void setNext(DoubleNode<T> next) {
         this.next = next;
     }
 
-    public DoubleNode getPrevious() {
+    public DoubleNode<T> getPrevious() {
         return previous;
     }
 
-    public void setPrevious(DoubleNode previous) {
+    public void setPrevious(DoubleNode<T> previous) {
         this.previous = previous;
     }
 
