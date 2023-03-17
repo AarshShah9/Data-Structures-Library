@@ -2,10 +2,10 @@ package main.java.mylib.datastructures.linear;
 
 import main.java.mylib.datastructures.nodes.SingleNode;
 
-public class Queue {
+public class Queue<T> {
     private int size;
-    private SingleNode head;
-    private SingleNode tail;
+    private SingleNode<T> head;
+    private SingleNode<T> tail;
 
     public Queue() {
         size = 0;
@@ -17,8 +17,8 @@ public class Queue {
         return size == 0;
     }
 
-    public void enqueue(int data) {
-        SingleNode newNode = new SingleNode(data);
+    public void enqueue(T data) {
+        SingleNode<T> newNode = new SingleNode<>(data);
         if (empty()) {
             head = newNode;
             tail = newNode;
@@ -29,25 +29,25 @@ public class Queue {
         size++;
     }
 
-    public int dequeue() {
+    public T dequeue() {
         if (empty()) {
             throw new RuntimeException("Queue is empty");
         }
-        int data = head.getValue();
+        T data = head.getValue();
         head = head.getNext();
         size--;
         return data;
     }
 
-    public int peek() {
+    public T peek() {
         if (empty()) {
             throw new RuntimeException("Queue is empty");
         }
         return head.getValue();
     }
 
-    public int search(int data) {
-        SingleNode current = head;
+    public int search(T data) {
+        SingleNode<T> current = head;
         int index = 0;
         while (current != null) {
             if (current.getValue() == data) {

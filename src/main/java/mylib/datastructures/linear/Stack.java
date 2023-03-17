@@ -2,9 +2,9 @@ package main.java.mylib.datastructures.linear;
 
 import main.java.mylib.datastructures.nodes.SingleNode;
 
-public class Stack {
+public class Stack<T> {
     private int size;
-    private SingleNode top;
+    private SingleNode<T> top;
 
     public Stack() {
         size = 0;
@@ -15,18 +15,18 @@ public class Stack {
         return size == 0;
     }
 
-    public void push(int data) {
-        SingleNode newNode = new SingleNode(data);
+    public void push(T data) {
+        SingleNode<T> newNode = new SingleNode<>(data);
         newNode.setNext(top);
         top = newNode;
         size++;
     }
 
-    public int pop() {
+    public T pop() {
         if (empty()) {
             throw new RuntimeException("Stack is empty");
         }
-        int data = top.getValue();
+        T data = top.getValue();
         top = top.getNext();
         size--;
         return data;
@@ -36,15 +36,15 @@ public class Stack {
         return size;
     }
 
-    public int peek() {
+    public T peek() {
         if (empty()) {
             throw new RuntimeException("Stack is empty");
         }
         return top.getValue();
     }
 
-    public int search(int data) {
-        SingleNode current = top;
+    public int search(T data) {
+        SingleNode<T> current = top;
         int index = 0;
         while (current != null) {
             if (current.getValue() == data) {
