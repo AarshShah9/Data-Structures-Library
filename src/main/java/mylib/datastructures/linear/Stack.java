@@ -11,7 +11,7 @@ public class Stack {
         top = null;
     }
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return size == 0;
     }
 
@@ -23,7 +23,7 @@ public class Stack {
     }
 
     public int pop() {
-        if (isEmpty()) {
+        if (empty()) {
             throw new RuntimeException("Stack is empty");
         }
         int data = top.getValue();
@@ -37,7 +37,7 @@ public class Stack {
     }
 
     public int peek() {
-        if (isEmpty()) {
+        if (empty()) {
             throw new RuntimeException("Stack is empty");
         }
         return top.getValue();
