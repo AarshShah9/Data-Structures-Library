@@ -58,7 +58,7 @@ public class SinglyLinkedList<T> {
         }
     }
 
-    public void SortedInsert(SingleNode<T> node) {
+    public void sortedInsert(SingleNode<T> node) {
         // TODO Auto-generated method stub
     }
 
