@@ -4,8 +4,8 @@ import main.java.mylib.datastructures.nodes.SingleNode;
 
 public class SinglyLinkedList<T> {
 
-    private SingleNode<T> head;
-    private int size;
+    protected SingleNode<T> head;
+    protected int size;
 
     public SinglyLinkedList() {
         head = null;
@@ -25,6 +25,7 @@ public class SinglyLinkedList<T> {
         return this.size;
     }
 
+    // TODO should insert NODE not data
     public void insertHead(T data) {
         SingleNode<T> newNode = new SingleNode<T>(data);
         newNode.setNext(head);
@@ -32,6 +33,7 @@ public class SinglyLinkedList<T> {
         size++;
     }
 
+    // TODO should insert NODE not data
     public void insertTail(T data) {
         SingleNode<T> newNode = new SingleNode<T>(data);
         SingleNode<T> current = head;
@@ -119,7 +121,7 @@ public class SinglyLinkedList<T> {
     }
 
     public void print() {
-        System.out.print("Singly Linked List Information: ");
+        System.out.print("Data Structure Information: ");
         System.out.print("List Length: " + size);
         System.out.print("Sort Status: " + "N/A"); // TODO Implement sort status
         System.out.print("List Values: ");

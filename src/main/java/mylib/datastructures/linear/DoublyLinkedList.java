@@ -3,9 +3,9 @@ package main.java.mylib.datastructures.linear;
 import main.java.mylib.datastructures.nodes.DoubleNode;
 
 public class DoublyLinkedList<T> {
-    private DoubleNode<T> head;
-    private DoubleNode<T> tail;
-    private int size;
+    protected DoubleNode<T> head;
+    protected DoubleNode<T> tail;
+    protected int size;
 
     public DoublyLinkedList() {
         head = null;
@@ -31,6 +31,7 @@ public class DoublyLinkedList<T> {
         return this.size;
     }
 
+    // TODO should insert NODE not data
     public void insertHead(T data) {
         DoubleNode<T> newNode = new DoubleNode<T>(data);
         if (head == null) {
@@ -44,6 +45,7 @@ public class DoublyLinkedList<T> {
         size++;
     }
 
+    // TODO should insert NODE not data
     public void insertTail(T data) {
         DoubleNode<T> newNode = new DoubleNode<T>(data);
         if (tail == null) {

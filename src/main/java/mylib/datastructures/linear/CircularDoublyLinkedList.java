@@ -2,24 +2,24 @@ package main.java.mylib.datastructures.linear;
 
 import main.java.mylib.datastructures.nodes.DoubleNode;
 
-public class CircularDoublyLinkedList<T> {
-    private DoubleNode<T> head;
-    private int size;
+public class CircularDoublyLinkedList<T> extends DoublyLinkedList<T> {
 
     public CircularDoublyLinkedList() {
         head = null;
+        tail = null;
         size = 0;
     }
 
-    public DoubleNode<T> getHead() {
-        return this.head;
+    public CircularDoublyLinkedList(T data) {
+        head = new DoubleNode<T>(data);
+        head.setNext(head);
+        head.setPrevious(head);
+        tail = head;
+        size = 1;
     }
 
-    public int getSize() {
-        return this.size;
-    }
-
-    public void insertAtHead(T data) {
+    // TODO should insert NODE not data
+    public void insertHead(T data) {
         DoubleNode<T> newNode = new DoubleNode<T>(data);
         if (head == null) {
             head = newNode;
@@ -39,7 +39,8 @@ public class CircularDoublyLinkedList<T> {
         size++;
     }
 
-    public void insertAtTail(T data) {
+    // TODO should insert NODE not data
+    public void insertTail(T data) {
         DoubleNode<T> newNode = new DoubleNode<T>(data);
         if (head == null) {
             head = newNode;
