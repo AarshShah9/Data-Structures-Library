@@ -12,6 +12,11 @@ public class SinglyLinkedList<T> {
         size = 0;
     }
 
+    public SinglyLinkedList(T data) {
+        head = new SingleNode<T>(data);
+        size = 1;
+    }
+
     public SingleNode<T> getHead() {
         return this.head;
     }
@@ -20,14 +25,14 @@ public class SinglyLinkedList<T> {
         return this.size;
     }
 
-    public void insertAtHead(T data) {
+    public void insertHead(T data) {
         SingleNode<T> newNode = new SingleNode<T>(data);
         newNode.setNext(head);
         head = newNode;
         size++;
     }
 
-    public void insertAtTail(T data) {
+    public void insertTail(T data) {
         SingleNode<T> newNode = new SingleNode<T>(data);
         SingleNode<T> current = head;
         while (current.getNext() != null) {
@@ -37,29 +42,93 @@ public class SinglyLinkedList<T> {
         size++;
     }
 
-    public void delete(T value) {
+    public void insert(SingleNode<T> node, int position) {
+        if (position == 0) {
+            insertHead(node.getValue());
+        } else if (position == size) {
+            insertTail(node.getValue());
+        } else {
+            SingleNode<T> current = head;
+            for (int i = 0; i < position - 1; i++) {
+                current = current.getNext();
+            }
+            node.setNext(current.getNext());
+            current.setNext(node);
+            size++;
+        }
+    }
+
+    public void SortedInsert(SingleNode<T> node) {
+        // TODO Auto-generated method stub
+    }
+
+    // TODO SHOULD THIS CHECK FOR REFERENCES OR VALUES?
+    public SingleNode<T> search(SingleNode<T> node) {
+
         SingleNode<T> current = head;
         while (current != null) {
-            if (current.getValue().equals(value)) {
-                if (current == head) {
-                    head = head.getNext();
-                } else {
-                    SingleNode<T> previous = head;
-                    while (previous.getNext() != current) {
-                        previous = previous.getNext();
-                    }
-                    previous.setNext(current.getNext());
-                }
-                break;
+            if (current == node) {
+                return current;
             }
             current = current.getNext();
         }
-        size--;
+        return null;
+
+    }
+
+    public void deleteHead() {
+        if (head != null) {
+            head = head.getNext();
+            size--;
+        }
+    }
+
+    public void deleteTail() {
+        if (head != null) {
+            SingleNode<T> current = head;
+            while (current.getNext().getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(null);
+            size--;
+        }
+    }
+
+    public void delete(SingleNode<T> node) {
+        if (head != null) {
+            if (head == node) {
+                deleteHead();
+            } else {
+                SingleNode<T> current = head;
+                while (current.getNext() != node) {
+                    current = current.getNext();
+                }
+                current.setNext(node.getNext());
+                size--;
+            }
+        }
+    }
+
+    public void sort() {
+        // TODO Auto-generated method stub
     }
 
     public void clear() {
         head = null;
         size = 0;
+    }
+
+    public void print() {
+        System.out.print("Singly Linked List Information: ");
+        System.out.print("List Length: " + size);
+        System.out.print("Sort Status: " + "N/A"); // TODO Implement sort status
+        System.out.print("List Values: ");
+        SingleNode<T> current = head;
+        while (current != null) {
+            System.out.print(current.getValue() + " ");
+            current = current.getNext();
+        }
+        System.out.println();
     }
 
 }
