@@ -1,14 +1,18 @@
 package main.java.mylib.datastructures.linear;
 
+import main.java.mylib.datastructures.nodes.SingleNode;
+
 public class Queue<T> extends SinglyLinkedList<T> {
-    private int size;
-    private SingleNode<T> head;
     private SingleNode<T> tail;
 
     public Queue() {
-        size = 0;
-        head = null;
+        super();
         tail = null;
+    }
+
+    public Queue(T data) {
+        super(data);
+        tail = head;
     }
 
     public boolean empty() {
@@ -16,15 +20,10 @@ public class Queue<T> extends SinglyLinkedList<T> {
     }
 
     public void enqueue(T data) {
-        SingleNode<T> newNode = new SingleNode<>(data);
-        if (empty()) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            tail.setNext(newNode);
-            tail = newNode;
+        super.insertTail(data);
+        while (tail.getNext() != null) {
+            tail = tail.getNext();
         }
-        size++;
     }
 
     public T dequeue() {
@@ -32,8 +31,7 @@ public class Queue<T> extends SinglyLinkedList<T> {
             throw new RuntimeException("Queue is empty");
         }
         T data = head.getValue();
-        head = head.getNext();
-        size--;
+        super.deleteHead();
         return data;
     }
 
@@ -57,13 +55,30 @@ public class Queue<T> extends SinglyLinkedList<T> {
         return -1;
     }
 
+    public int size() {
+        return super.getSize();
+    }
+
+    @Override
     public void clear() {
         head = null;
         tail = null;
         size = 0;
     }
 
-    public int size() {
-        return size;
+    @Override
+    public void insertHead(T data) {
+    }
+
+    @Override
+    public void insert(SingleNode<T> node, int position) {
+    }
+
+    @Override
+    public void delete(SingleNode<T> node) {
+    }
+
+    @Override
+    public void sortedInsert(SingleNode<T> node) {
     }
 }
