@@ -1,8 +1,6 @@
 package main.java.mylib.datastructures.linear;
 
-import main.java.mylib.datastructures.nodes.SingleNode;
-
-public class Queue<T> {
+public class Queue<T> extends SinglyLinkedList<T> {
     private int size;
     private SingleNode<T> head;
     private SingleNode<T> tail;

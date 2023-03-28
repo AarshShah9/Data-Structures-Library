@@ -2,13 +2,17 @@ package main.java.mylib.datastructures.linear;
 
 import main.java.mylib.datastructures.nodes.SingleNode;
 
-public class Stack<T> {
-    private int size;
+public class Stack<T> extends SinglyLinkedList<T> {
     private SingleNode<T> top;
 
     public Stack() {
-        size = 0;
+        super();
         top = null;
+    }
+
+    public Stack(T data) {
+        super(data);
+        top = head;
     }
 
     public boolean empty() {
@@ -16,10 +20,12 @@ public class Stack<T> {
     }
 
     public void push(T data) {
-        SingleNode<T> newNode = new SingleNode<>(data);
-        newNode.setNext(top);
-        top = newNode;
-        size++;
+        super.insertHead(data);
+        SingleNode<T> current = head;
+        while (current.getNext() != null) {
+            current = current.getNext();
+        }
+        top = current;
     }
 
     public T pop() {
@@ -27,13 +33,12 @@ public class Stack<T> {
             throw new RuntimeException("Stack is empty");
         }
         T data = top.getValue();
-        top = top.getNext();
-        size--;
+        deleteTail();
         return data;
     }
 
     public int size() {
-        return size;
+        return getSize();
     }
 
     public T peek() {
@@ -56,9 +61,25 @@ public class Stack<T> {
         return -1;
     }
 
-    public void clear() {
-        // Check with Aarsh/prof about this
-        top = null;
-        size = 0;
+    @Override
+    public void insert(SingleNode<T> node, int position) {
     }
+
+    @Override
+    public void insertHead(T data) {
+    }
+
+    @Override
+    public void sortedInsert(SingleNode<T> node) {
+    }
+
+    @Override
+    public void deleteHead() {
+    }
+
+    @Override
+    public void delete(SingleNode<T> node) {
+    }
+
+    // Currently left sort and print as is, but they may need overriding
 }
