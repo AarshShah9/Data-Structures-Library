@@ -2,7 +2,7 @@ package main.java.mylib.datastructures.linear;
 
 import main.java.mylib.datastructures.nodes.DNode;
 
-public class CDLL<T> extends DLL<T> {
+public class CDLL<T extends Comparable<T>> extends DLL<T> {
 
     public CDLL() {
         head = null;

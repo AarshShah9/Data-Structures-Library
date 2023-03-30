@@ -35,6 +35,10 @@ public class DLL<T extends Comparable<T>> {
         return this.size;
     }
 
+    public boolean isSorted() {
+        return this.sorted;
+    }
+
     public void insertHead(DNode<T> node) {
         if (head == null) {
             head = node;

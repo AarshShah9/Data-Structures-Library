@@ -29,11 +29,20 @@ public class SLL<T extends Comparable<T>> {
         return this.size;
     }
 
+    public boolean isSorted() {
+        return this.sorted;
+    }
+
     public void insertHead(SNode<T> node) {
-        node.setNext(head);
-        head = node;
-        size++;
-        sorted = false;
+        if (head == null) {
+            head = node;
+        } else {
+            node.setNext(head);
+            head = node;
+            size++;
+            sorted = false;
+        }
+
     }
 
     public void insertTail(SNode<T> node) {

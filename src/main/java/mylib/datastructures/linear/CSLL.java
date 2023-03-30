@@ -2,63 +2,64 @@ package main.java.mylib.datastructures.linear;
 
 import main.java.mylib.datastructures.nodes.SNode;
 
-public class CSLL<T> extends SLL<T> {
+public class CSLL<T extends Comparable<T>> extends SLL<T> {
 
     public CSLL() {
         head = null;
         size = 0;
+        sorted = false;
     }
 
-    public CSLL(T data) {
-        head = new SNode<T>(data);
+    public CSLL(SNode<T> node) {
+        head = node;
         head.setNext(head);
         size = 1;
+        sorted = false;
     }
 
-    // TODO should insert NODE not data
     @Override
-    public void insertHead(T data) {
-        SNode<T> newNode = new SNode<T>(data);
+    public void insertHead(SNode<T> node) {
         if (head == null) {
-            head = newNode;
+            head = node;
             head.setNext(head);
         } else {
             SNode<T> current = head;
             while (current.getNext() != head) {
                 current = current.getNext();
             }
-            current.setNext(newNode);
-            newNode.setNext(head);
-            head = newNode;
+            current.setNext(node);
+            node.setNext(head);
+            head = node;
         }
         size++;
+        sorted = false;
     }
 
-    // TODO should insert NODE not data
     @Override
-    public void insertTail(T data) {
-        SNode<T> newNode = new SNode<T>(data);
+    public void insertTail(SNode<T> node) {
         if (head == null) {
-            head = newNode;
+            head = node;
             head.setNext(head);
         } else {
             SNode<T> current = head;
             while (current.getNext() != head) {
                 current = current.getNext();
             }
-            current.setNext(newNode);
-            newNode.setNext(head);
+            current.setNext(node);
+            node.setNext(head);
         }
         size++;
+        sorted = false;
+
     }
 
     @Override
     public void insert(SNode<T> node, int position) {
         if (position == 0) {
-            insertHead(node.getValue()); // TODO may not need to override this method (as long as polymorphism works the
-                                         // way I think it does)
+            insertHead(node); // TODO may not need to override this method (as long as polymorphism works the
+                              // way I think it does)
         } else if (position == size) {
-            insertTail(node.getValue()); // TODO same as above
+            insertTail(node); // TODO same as above
         } else {
             SNode<T> current = head;
             for (int i = 0; i < position - 1; i++) {
