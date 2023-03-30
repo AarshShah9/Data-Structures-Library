@@ -1,11 +1,11 @@
 package main.java.mylib.datastructures.nodes;
 
-public class TreeNode<T> {
+public class TNode<T> {
     private T value;
-    private TreeNode<T> leftChild;
-    private TreeNode<T> rightChild;
+    private TNode<T> leftChild;
+    private TNode<T> rightChild;
 
-    public TreeNode(T value) {
+    public TNode(T value) {
         this.value = value;
         this.leftChild = null;
         this.rightChild = null;
@@ -19,19 +19,19 @@ public class TreeNode<T> {
         this.value = value;
     }
 
-    public TreeNode<T> getLeftChild() {
+    public TNode<T> getLeftChild() {
         return leftChild;
     }
 
-    public void setLeftChild(TreeNode<T> leftChild) {
+    public void setLeftChild(TNode<T> leftChild) {
         this.leftChild = leftChild;
     }
 
-    public TreeNode<T> getRightChild() {
+    public TNode<T> getRightChild() {
         return rightChild;
     }
 
-    public void setRightChild(TreeNode<T> rightChild) {
+    public void setRightChild(TNode<T> rightChild) {
         this.rightChild = rightChild;
     }
 }

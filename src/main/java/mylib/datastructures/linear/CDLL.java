@@ -1,17 +1,17 @@
 package main.java.mylib.datastructures.linear;
 
-import main.java.mylib.datastructures.nodes.DoubleNode;
+import main.java.mylib.datastructures.nodes.DNode;
 
-public class CircularDoublyLinkedList<T> extends DoublyLinkedList<T> {
+public class CDLL<T> extends DLL<T> {
 
-    public CircularDoublyLinkedList() {
+    public CDLL() {
         head = null;
         tail = null;
         size = 0;
     }
 
-    public CircularDoublyLinkedList(T data) {
-        head = new DoubleNode<T>(data);
+    public CDLL(T data) {
+        head = new DNode<T>(data);
         head.setNext(head);
         head.setPrevious(head);
         tail = head;
@@ -20,13 +20,13 @@ public class CircularDoublyLinkedList<T> extends DoublyLinkedList<T> {
 
     // TODO should insert NODE not data
     public void insertHead(T data) {
-        DoubleNode<T> newNode = new DoubleNode<T>(data);
+        DNode<T> newNode = new DNode<T>(data);
         if (head == null) {
             head = newNode;
             head.setNext(head);
             head.setPrevious(head);
         } else {
-            DoubleNode<T> current = head;
+            DNode<T> current = head;
             while (current.getNext() != head) {
                 current = current.getNext();
             }
@@ -41,13 +41,13 @@ public class CircularDoublyLinkedList<T> extends DoublyLinkedList<T> {
 
     // TODO should insert NODE not data
     public void insertTail(T data) {
-        DoubleNode<T> newNode = new DoubleNode<T>(data);
+        DNode<T> newNode = new DNode<T>(data);
         if (head == null) {
             head = newNode;
             head.setNext(head);
             head.setPrevious(head);
         } else {
-            DoubleNode<T> current = head;
+            DNode<T> current = head;
             while (current.getNext() != head) {
                 current = current.getNext();
             }
@@ -60,7 +60,7 @@ public class CircularDoublyLinkedList<T> extends DoublyLinkedList<T> {
     }
 
     public void delete(T value) {
-        DoubleNode<T> current = head;
+        DNode<T> current = head;
         while (current != null) {
             if (current.getValue().equals(value)) {
                 if (current == head) {

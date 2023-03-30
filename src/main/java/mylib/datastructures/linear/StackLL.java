@@ -1,12 +1,12 @@
 package main.java.mylib.datastructures.linear;
 
-import main.java.mylib.datastructures.nodes.SingleNode;
+import main.java.mylib.datastructures.nodes.SNode;
 
-public class Stack<T> {
+public class StackLL<T> {
     private int size;
-    private SingleNode<T> top;
+    private SNode<T> top;
 
-    public Stack() {
+    public StackLL() {
         size = 0;
         top = null;
     }
@@ -16,7 +16,7 @@ public class Stack<T> {
     }
 
     public void push(T data) {
-        SingleNode<T> newNode = new SingleNode<>(data);
+        SNode<T> newNode = new SNode<>(data);
         newNode.setNext(top);
         top = newNode;
         size++;
@@ -44,7 +44,7 @@ public class Stack<T> {
     }
 
     public int search(T data) {
-        SingleNode<T> current = top;
+        SNode<T> current = top;
         int index = 0;
         while (current != null) {
             if (current.getValue() == data) {

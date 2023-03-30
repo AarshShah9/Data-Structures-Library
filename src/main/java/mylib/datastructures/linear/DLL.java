@@ -1,29 +1,33 @@
 package main.java.mylib.datastructures.linear;
 
-import main.java.mylib.datastructures.nodes.DoubleNode;
+import main.java.mylib.datastructures.nodes.DNode;
 
-public class DoublyLinkedList<T> {
-    protected DoubleNode<T> head;
-    protected DoubleNode<T> tail;
+public class DLL<T extends Comparable<T>> {
+    protected DNode<T> head;
+    protected DNode<T> tail;
     protected int size;
+    protected boolean sorted;
 
-    public DoublyLinkedList() {
+    public DLL() {
         head = null;
         tail = null;
         size = 0;
+        sorted = false;
+
     }
 
-    public DoublyLinkedList(T data) {
-        head = new DoubleNode<T>(data);
+    public DLL(T data) {
+        head = new DNode<T>(data);
         tail = head;
         size = 1;
+        sorted = false;
     }
 
-    public DoubleNode<T> getHead() {
+    public DNode<T> getHead() {
         return this.head;
     }
 
-    public DoubleNode<T> getTail() {
+    public DNode<T> getTail() {
         return this.tail;
     }
 
@@ -31,41 +35,41 @@ public class DoublyLinkedList<T> {
         return this.size;
     }
 
-    // TODO should insert NODE not data
-    public void insertHead(T data) {
-        DoubleNode<T> newNode = new DoubleNode<T>(data);
+    public void insertHead(DNode<T> node) {
         if (head == null) {
-            head = newNode;
-            tail = newNode;
+            head = node;
+            tail = node;
         } else {
-            newNode.setNext(head);
-            head.setPrevious(newNode);
-            head = newNode;
+            node.setNext(head);
+            head.setPrevious(node);
+            head = node;
         }
         size++;
+        sorted = false;
+
     }
 
-    // TODO should insert NODE not data
-    public void insertTail(T data) {
-        DoubleNode<T> newNode = new DoubleNode<T>(data);
+    public void insertTail(DNode<T> node) {
         if (tail == null) {
-            head = newNode;
-            tail = newNode;
+            head = node;
+            tail = node;
         } else {
-            tail.setNext(newNode);
-            newNode.setPrevious(tail);
-            tail = newNode;
+            node.setPrevious(tail);
+            tail.setNext(node);
+            tail = node;
         }
         size++;
+        sorted = false;
+
     }
 
-    public void insert(DoubleNode<T> node, int position) {
+    public void insert(DNode<T> node, int position) {
         if (position == 0) {
-            insertHead(node.getValue());
+            insertHead(node);
         } else if (position == size) {
-            insertTail(node.getValue());
+            insertTail(node);
         } else {
-            DoubleNode<T> current = head;
+            DNode<T> current = head;
             for (int i = 0; i < position - 1; i++) {
                 current = current.getNext();
             }
@@ -74,15 +78,42 @@ public class DoublyLinkedList<T> {
             current.getNext().setPrevious(node);
             current.setNext(node);
             size++;
+            sorted = false;
+
         }
     }
 
-    public void sortedInsert(DoubleNode<T> node) {
-        // TODO Auto-generated method stub
+    public void sortedInsert(DNode<T> node) {
+        if (!sorted) {
+            sort();
+        }
+        if (head == null) {
+            head = node;
+        } else {
+            DNode<T> current = head;
+            while (current != null) {
+                if (current.getValue().compareTo(node.getValue()) > 0) {
+                    node.setNext(current);
+                    node.setPrevious(current.getPrevious());
+                    if (current.getPrevious() != null) {
+                        current.getPrevious().setNext(node);
+                    } else {
+                        head = node;
+                    }
+                    current.setPrevious(node);
+                    size++;
+                    break;
+                }
+                current = current.getNext();
+            }
+            if (current == null) {
+                insertTail(node);
+            }
+        }
     }
 
-    public DoubleNode<T> search(DoubleNode<T> node) {
-        DoubleNode<T> current = head;
+    public DNode<T> search(DNode<T> node) {
+        DNode<T> current = head;
         while (current != null) {
             if (current.getValue().equals(node.getValue())) {
                 return current;
@@ -112,8 +143,8 @@ public class DoublyLinkedList<T> {
         }
     }
 
-    public void delete(DoubleNode<T> node) {
-        DoubleNode<T> current = head;
+    public void delete(DNode<T> node) {
+        DNode<T> current = head;
         while (current != null) {
             if (current.getValue().equals(node.getValue())) {
                 if (current.getPrevious() != null) {
@@ -134,7 +165,25 @@ public class DoublyLinkedList<T> {
     }
 
     public void sort() {
-        // TODO Auto-generated method stub
+        if (sorted || size < 2) {
+            sorted = true;
+            return;
+        }
+
+        DNode<T> current = head;
+        while (current != null) {
+            DNode<T> key = current;
+            T value = key.getValue();
+            DNode<T> prev = key.getPrevious();
+            while (prev != null && prev.getValue().compareTo(value) > 0) {
+                key.setValue(prev.getValue());
+                key = prev;
+                prev = key.getPrevious();
+            }
+            key.setValue(value);
+            current = current.getNext();
+        }
+        sorted = true;
     }
 
     public void clear() {
@@ -148,7 +197,7 @@ public class DoublyLinkedList<T> {
         System.out.print("List Length: " + size);
         System.out.print("Sort Status: " + "N/A"); // TODO Implement sort status
         System.out.print("List Values: ");
-        DoubleNode<T> current = head;
+        DNode<T> current = head;
         while (current != null) {
             System.out.print(current.getValue() + " ");
             current = current.getNext();

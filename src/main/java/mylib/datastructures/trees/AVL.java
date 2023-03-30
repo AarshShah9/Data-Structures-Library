@@ -1,15 +1,15 @@
 package main.java.mylib.datastructures.trees;
 
-import main.java.mylib.datastructures.nodes.TreeNode;
+import main.java.mylib.datastructures.nodes.TNode;
 
 public class AVL<T extends Comparable<T>> {
-    private TreeNode<T> root;
+    private TNode<T> root;
 
     public AVL() {
         root = null;
     }
 
-    public TreeNode<T> getRoot() {
+    public TNode<T> getRoot() {
         return root;
     }
 

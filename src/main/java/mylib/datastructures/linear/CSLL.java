@@ -1,16 +1,16 @@
 package main.java.mylib.datastructures.linear;
 
-import main.java.mylib.datastructures.nodes.SingleNode;
+import main.java.mylib.datastructures.nodes.SNode;
 
-public class CircularLinkedList<T> extends SinglyLinkedList<T> {
+public class CSLL<T> extends SLL<T> {
 
-    public CircularLinkedList() {
+    public CSLL() {
         head = null;
         size = 0;
     }
 
-    public CircularLinkedList(T data) {
-        head = new SingleNode<T>(data);
+    public CSLL(T data) {
+        head = new SNode<T>(data);
         head.setNext(head);
         size = 1;
     }
@@ -18,12 +18,12 @@ public class CircularLinkedList<T> extends SinglyLinkedList<T> {
     // TODO should insert NODE not data
     @Override
     public void insertHead(T data) {
-        SingleNode<T> newNode = new SingleNode<T>(data);
+        SNode<T> newNode = new SNode<T>(data);
         if (head == null) {
             head = newNode;
             head.setNext(head);
         } else {
-            SingleNode<T> current = head;
+            SNode<T> current = head;
             while (current.getNext() != head) {
                 current = current.getNext();
             }
@@ -37,12 +37,12 @@ public class CircularLinkedList<T> extends SinglyLinkedList<T> {
     // TODO should insert NODE not data
     @Override
     public void insertTail(T data) {
-        SingleNode<T> newNode = new SingleNode<T>(data);
+        SNode<T> newNode = new SNode<T>(data);
         if (head == null) {
             head = newNode;
             head.setNext(head);
         } else {
-            SingleNode<T> current = head;
+            SNode<T> current = head;
             while (current.getNext() != head) {
                 current = current.getNext();
             }
@@ -53,14 +53,14 @@ public class CircularLinkedList<T> extends SinglyLinkedList<T> {
     }
 
     @Override
-    public void insert(SingleNode<T> node, int position) {
+    public void insert(SNode<T> node, int position) {
         if (position == 0) {
             insertHead(node.getValue()); // TODO may not need to override this method (as long as polymorphism works the
                                          // way I think it does)
         } else if (position == size) {
             insertTail(node.getValue()); // TODO same as above
         } else {
-            SingleNode<T> current = head;
+            SNode<T> current = head;
             for (int i = 0; i < position - 1; i++) {
                 current = current.getNext();
             }
@@ -71,14 +71,14 @@ public class CircularLinkedList<T> extends SinglyLinkedList<T> {
     }
 
     @Override // TODO not sure if this is necessary
-    public void sortedInsert(SingleNode<T> node) {
+    public void sortedInsert(SNode<T> node) {
         // TODO Auto-generated method stub
     }
 
     @Override
     public void deleteHead() {
         if (head != null) {
-            SingleNode<T> current = head;
+            SNode<T> current = head;
             while (current.getNext() != head) {
                 current = current.getNext();
             }
@@ -91,7 +91,7 @@ public class CircularLinkedList<T> extends SinglyLinkedList<T> {
     @Override
     public void deleteTail() {
         if (head != null) {
-            SingleNode<T> current = head;
+            SNode<T> current = head;
             while (current.getNext().getNext() != head) {
                 current = current.getNext();
             }
@@ -101,13 +101,13 @@ public class CircularLinkedList<T> extends SinglyLinkedList<T> {
     }
 
     @Override
-    public void delete(SingleNode<T> node) {
+    public void delete(SNode<T> node) {
         if (head != null) {
             if (head == node) {
                 deleteHead(); // TODO may not need to override this method (as long as polymorphism works the
                 // way I think it does)
             } else {
-                SingleNode<T> current = head;
+                SNode<T> current = head;
                 while (current.getNext() != node) {
                     current = current.getNext();
                 }
