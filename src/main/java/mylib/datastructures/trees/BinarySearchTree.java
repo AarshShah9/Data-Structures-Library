@@ -1,6 +1,6 @@
 package main.java.mylib.datastructures.trees;
 
-import main.java.mylib.datastructures.nodes.TreeNode;
+import main.java.mylib.datastructures.nodes.TNode;
 
 public class BinarySearchTree<T> {
     private TreeNode<T> root;
