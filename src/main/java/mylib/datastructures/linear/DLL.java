@@ -194,12 +194,13 @@ public class DLL<T extends Comparable<T>> {
         head = null;
         tail = null;
         size = 0;
+        sorted = false;
     }
 
     public void print() {
         System.out.print("Singly Linked List Information: ");
         System.out.print("List Length: " + size);
-        System.out.print("Sort Status: " + "N/A"); // TODO Implement sort status
+        System.out.print("Sort Status: " + sorted);
         System.out.print("List Values: ");
         DNode<T> current = head;
         while (current != null) {
