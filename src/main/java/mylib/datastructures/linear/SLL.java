@@ -5,17 +5,20 @@ import main.java.mylib.datastructures.nodes.SNode;
 public class SLL<T extends Comparable<T>> {
 
     protected SNode<T> head;
+    protected SNode<T> tail;
     protected int size;
     protected boolean sorted;
 
     public SLL() {
         head = null;
+        tail = null;
         size = 0;
         sorted = false;
     }
 
     public SLL(T data) {
         head = new SNode<T>(data);
+        tail = head;
         size = 1;
         sorted = false;
 
@@ -23,6 +26,10 @@ public class SLL<T extends Comparable<T>> {
 
     public SNode<T> getHead() {
         return this.head;
+    }
+
+    public SNode<T> getTail() {
+        return this.tail;
     }
 
     public int getSize() {
@@ -49,14 +56,11 @@ public class SLL<T extends Comparable<T>> {
         if (head == null) {
             head = node;
         } else {
-            SNode<T> current = head;
-            while (current.getNext() != null) {
-                current = current.getNext();
-            }
-            current.setNext(node);
+            tail.setNext(node);
+            tail = node;
+            size++;
+            sorted = false;
         }
-        size++;
-        sorted = false;
     }
 
     public void insert(SNode<T> node, int position) {
@@ -94,6 +98,7 @@ public class SLL<T extends Comparable<T>> {
             node.setNext(current.getNext());
             current.setNext(node);
         }
+        size++;
     }
 
     // TODO SHOULD THIS CHECK FOR REFERENCES OR VALUES?
@@ -119,12 +124,16 @@ public class SLL<T extends Comparable<T>> {
 
     public void deleteTail() {
         if (head != null) {
-            SNode<T> current = head;
-            while (current.getNext().getNext() != null) {
-                current = current.getNext();
+            if (head.getNext() == null) {
+                head = null;
+            } else {
+                SNode<T> current = head;
+                while (current.getNext().getNext() != null) {
+                    current = current.getNext();
+                }
+                current.setNext(null);
+                size--;
             }
-            current.setNext(null);
-            size--;
         }
     }
 

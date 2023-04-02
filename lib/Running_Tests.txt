@@ -1,0 +1,10 @@
+Compilation in cmd:
+
+javac -cp .;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar src/test/SNodeTest.java
+
+Running in cmd:
+
+java -cp .;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore src.test.SNodeTest
+
+
+
