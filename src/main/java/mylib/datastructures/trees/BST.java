@@ -28,6 +28,7 @@ public class BST<T extends Comparable<T>> {
         this.root = root;
     }
 
+    // TODO Fix this method - calculate balance factor after each insertion
     public void insert(T data) {
         if (root == null) {
             root = new TNode<>(data, 0, null, null, null);
@@ -50,6 +51,7 @@ public class BST<T extends Comparable<T>> {
         }
     }
 
+    // TODO Fix this method - calculate balance factor after each insertion
     public void insert(TNode<T> node) {
         if (root == null) {
             root = node;
@@ -73,6 +75,7 @@ public class BST<T extends Comparable<T>> {
 
     }
 
+    // TODO Fix this method
     public void delete(T data) {
         TNode<T> node = search(data);
         if (node == null) {
@@ -190,6 +193,10 @@ public class BST<T extends Comparable<T>> {
             System.out.print(data + " ");
         }
         System.out.println();
+    }
+
+    private void calculateBalanceFactor(TNode<T> node) {
+        // TODO implement
     }
 
 }
