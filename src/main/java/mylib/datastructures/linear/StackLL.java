@@ -1,16 +1,16 @@
 package main.java.mylib.datastructures.linear;
 
-import main.java.mylib.datastructures.nodes.SingleNode;
+import main.java.mylib.datastructures.nodes.SNode;
 
-public class Stack<T> extends SinglyLinkedList<T> {
-    private SingleNode<T> top;
+public class StackLL<T extends Comparable<T>> extends SLL<T> {
+    private SNode<T> top;
 
-    public Stack() {
+    public StackLL() {
         super();
         top = null;
     }
 
-    public Stack(T data) {
+    public StackLL(T data) {
         super(data);
         top = head;
     }
@@ -21,7 +21,7 @@ public class Stack<T> extends SinglyLinkedList<T> {
 
     public void push(T data) {
         super.insertHead(data);
-        SingleNode<T> current = head;
+        SNode<T> current = head;
         while (current.getNext() != null) {
             current = current.getNext();
         }
@@ -49,7 +49,7 @@ public class Stack<T> extends SinglyLinkedList<T> {
     }
 
     public int search(T data) {
-        SingleNode<T> current = top;
+        SNode<T> current = top;
         int index = 0;
         while (current != null) {
             if (current.getValue() == data) {
@@ -62,7 +62,7 @@ public class Stack<T> extends SinglyLinkedList<T> {
     }
 
     @Override
-    public void insert(SingleNode<T> node, int position) {
+    public void insert(SNode<T> node, int position) {
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Stack<T> extends SinglyLinkedList<T> {
     }
 
     @Override
-    public void sortedInsert(SingleNode<T> node) {
+    public void sortedInsert(SNode<T> node) {
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Stack<T> extends SinglyLinkedList<T> {
     }
 
     @Override
-    public void delete(SingleNode<T> node) {
+    public void delete(SNode<T> node) {
     }
 
     // Currently left sort and print as is, but they may need overriding

@@ -1,16 +1,16 @@
 package main.java.mylib.datastructures.linear;
 
-import main.java.mylib.datastructures.nodes.SingleNode;
+import main.java.mylib.datastructures.nodes.SNode;
 
-public class Queue<T> extends SinglyLinkedList<T> {
-    private SingleNode<T> tail;
+public class QueueLL<T extends Comparable<T>> extends SLL<T> {
+    private SNode<T> tail;
 
-    public Queue() {
+    public QueueLL() {
         super();
         tail = null;
     }
 
-    public Queue(T data) {
+    public QueueLL(T data) {
         super(data);
         tail = head;
     }
@@ -43,7 +43,7 @@ public class Queue<T> extends SinglyLinkedList<T> {
     }
 
     public int search(T data) {
-        SingleNode<T> current = head;
+        SNode<T> current = head;
         int index = 0;
         while (current != null) {
             if (current.getValue() == data) {
@@ -71,14 +71,14 @@ public class Queue<T> extends SinglyLinkedList<T> {
     }
 
     @Override
-    public void insert(SingleNode<T> node, int position) {
+    public void insert(SNode<T> node, int position) {
     }
 
     @Override
-    public void delete(SingleNode<T> node) {
+    public void delete(SNode<T> node) {
     }
 
     @Override
-    public void sortedInsert(SingleNode<T> node) {
+    public void sortedInsert(SNode<T> node) {
     }
 }
