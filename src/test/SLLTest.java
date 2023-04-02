@@ -98,10 +98,173 @@ public class SLLTest {
 
     @Test
     public void testInsertAtPosition() {
+        ArrayList<Integer> expected = new ArrayList<Integer>(
+                Arrays.asList(1, 2, 4, 3));
+
         SLL<Integer> list = new SLL<Integer>(1);
+        list.insert(new SNode<Integer>(2), 1);
+        list.insert(new SNode<Integer>(3), 2);
+        list.insert(new SNode<Integer>(4), 2);
+
+        boolean valid = true;
+        int i = 0;
+        for (SNode<Integer> node = list.getHead(); node != null; node = node.getNext(), i++) {
+            if (node.getValue() != expected.get(i)) {
+                valid = false;
+                break;
+            }
+        }
+
+        assertTrue("Insert at position is not working as it should", valid);
+
+    }
+
+    @Test
+    public void testInsertAtInvalidPosition() {
+        SLL<Integer> list = new SLL<Integer>(1);
+        boolean exceptionCaught = false;
+        try {
+            list.insert(new SNode<Integer>(2), 10);
+            fail("Insert at invalid position should throw an exception");
+        } catch (IndexOutOfBoundsException e) {
+            exceptionCaught = true;
+        } catch (Exception e) {
+            fail("Insert at invalid position should throw an IndexOutOfBoundsException");
+        }
+
+        assertTrue("Insert at invalid position should throw an IndexOutOfBoundsException",
+                exceptionCaught);
+
+    }
+
+    @Test
+    public void testSortedInsert() {
+        ArrayList<Integer> expected = new ArrayList<Integer>(
+                Arrays.asList(1, 2, 3, 4));
+
+        SLL<Integer> list = new SLL<Integer>(1);
+        list.sortedInsert(new SNode<Integer>(3));
+        list.sortedInsert(new SNode<Integer>(4));
+        list.sortedInsert(new SNode<Integer>(2));
+
+        boolean valid = true;
+        int i = 0;
+        for (SNode<Integer> node = list.getHead(); node != null; node = node.getNext(), i++) {
+            if (node.getValue() != expected.get(i)) {
+                valid = false;
+                break;
+            }
+        }
+
+        assertTrue("Sorted insert is not working as it should", valid);
+    }
+
+    @Test
+    public void testSearchWithValidNode() {
+        SLL<Integer> list = new SLL<Integer>(1);
+        SNode<Integer> nodeToCheck = new SNode<Integer>(4);
+        list.insert(new SNode<Integer>(2), 1);
+        list.insert(nodeToCheck, 2);
+
+        SNode<Integer> node = list.search(nodeToCheck);
+
+        assertNotNull(node);
+        assertEquals("Node data should be 4", 4, (int) node.getValue());
+    }
+
+    @Test
+    public void testSearchWithInvalidNode() {
+        SLL<Integer> list = new SLL<Integer>(1);
+        SNode<Integer> nodeToCheck = new SNode<Integer>(4);
 
         list.insert(new SNode<Integer>(2), 1);
-        list.insert(new SNode<Integer>(2), 2);
-        list.insert(new SNode<Integer>(2), 2);
+        // nodeToCheck is not in the list
+
+        SNode<Integer> node = list.search(nodeToCheck);
+
+        assertNull("Search should return null pointer since node doesn't exist", node);
     }
+
+    @Test
+    public void testDeleteHead() {
+        SLL<Integer> list = new SLL<Integer>(1);
+        list.insertHead(new SNode<Integer>(2));
+
+        list.deleteHead();
+
+        assertEquals("Head should be 1", 1, (int) list.getHead().getValue());
+    }
+
+    @Test
+    public void testDeleteTail() {
+        SLL<Integer> list = new SLL<Integer>(1);
+        list.insertHead(new SNode<Integer>(2));
+
+        list.deleteTail();
+
+        assertEquals("Tail should be 2", 2, (int) list.getTail().getValue());
+    }
+
+    @Test
+    public void testDeleteNode() {
+        SLL<Integer> list = new SLL<Integer>(1);
+        SNode<Integer> nodeToDelete = new SNode<Integer>(2);
+        list.insert(nodeToDelete, 1);
+
+        list.delete(nodeToDelete);
+
+        assertNull("Node should be deleted", list.search(nodeToDelete));
+    }
+
+    @Test
+    public void testSort() {
+        ArrayList<Integer> expected = new ArrayList<Integer>(
+                Arrays.asList(1, 2, 3, 4));
+
+        SLL<Integer> list = new SLL<Integer>(1);
+        list.insert(new SNode<Integer>(3), 1);
+        list.insert(new SNode<Integer>(4), 2);
+        list.insert(new SNode<Integer>(2), 1);
+
+        list.sort();
+
+        boolean valid = true;
+        int i = 0;
+        for (SNode<Integer> node = list.getHead(); node != null; node = node.getNext(), i++) {
+            if (node.getValue() != expected.get(i)) {
+                valid = false;
+                break;
+            }
+        }
+
+        assertTrue("Sort is not working as it should", valid);
+        assertTrue("List should be sorted", list.isSorted());
+    }
+
+    @Test
+    public void testClear() {
+        SLL<Integer> list = new SLL<Integer>(1);
+        list.insert(new SNode<Integer>(2), 1);
+        list.insert(new SNode<Integer>(3), 2);
+        list.insert(new SNode<Integer>(4), 2);
+
+        list.clear();
+
+        assertNull("Head should be null", list.getHead());
+        assertNull("Tail should be null", list.getTail());
+        assertEquals("Size should be 0", 0, list.getSize());
+        assertFalse("List should not be sorted", list.isSorted());
+    }
+
+    @Test
+    public void testPrint() {
+        SLL<Integer> list = new SLL<Integer>(1);
+        list.insert(new SNode<Integer>(2), 1);
+        list.insert(new SNode<Integer>(3), 2);
+        list.insert(new SNode<Integer>(4), 2);
+
+        System.out.println("Check Manually");
+        list.print();
+    }
+
 }

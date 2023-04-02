@@ -64,7 +64,10 @@ public class SLL<T extends Comparable<T>> {
     }
 
     public void insert(SNode<T> node, int position) {
-        if (position == 0) {
+
+        if (position > size) {
+            throw new IndexOutOfBoundsException("Position is greater than size");
+        } else if (position == 0) {
             insertHead(node);
         } else if (position == size) {
             insertTail(node);
@@ -99,6 +102,7 @@ public class SLL<T extends Comparable<T>> {
             current.setNext(node);
         }
         size++;
+        sorted = true;
     }
 
     // TODO SHOULD THIS CHECK FOR REFERENCES OR VALUES?
@@ -174,6 +178,7 @@ public class SLL<T extends Comparable<T>> {
 
     public void clear() {
         head = null;
+        tail = null;
         size = 0;
         sorted = false;
     }
