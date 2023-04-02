@@ -1,11 +1,10 @@
 package test;
 
-import main.java.mylib.datastructures.nodes.*;
+import main.java.mylib.datastructures.nodes.SNode;
 
 import org.junit.*;
-import static org.junit.Assert.*;
 
-import java.util.*;
+import static org.junit.Assert.*;
 
 public class SNodeTest {
 
@@ -13,7 +12,7 @@ public class SNodeTest {
     public void testConstructorGoodValue() {
         SNode<Integer> node = new SNode<>(1);
 
-        assertEquals(1, node.getValue());
+        assertEquals((Integer) 1, (Integer) node.getValue());
         assertNull(node.getNext());
     }
 
@@ -29,7 +28,7 @@ public class SNodeTest {
     public void testGetValue() {
         SNode<Integer> node = new SNode<>(1);
 
-        assertEquals("Get value doesn't work", 1, node.getValue());
+        assertEquals("Get value doesn't work", (Integer) 1, (Integer) node.getValue());
     }
 
     @Test
@@ -37,7 +36,7 @@ public class SNodeTest {
         SNode<Integer> node = new SNode<>(1);
 
         node.setValue(2);
-        assertEquals("Set value doesn't woek", 2, node.getValue());
+        assertEquals("Set value doesn't woek", (Integer) 2, (Integer) node.getValue());
     }
 
     @Test

@@ -1,76 +1,74 @@
 package test;
 
 import main.java.mylib.datastructures.nodes.SNode;
-import main.java.mylib.datastructures.linear.SLL;
+import main.java.mylib.datastructures.linear.CSLL;
 
 import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.*;
 
-public class SLLTest {
+public class CSLLTest {
     private final ArrayList<Integer> DUMMY_DATA = new ArrayList<Integer>(
             Arrays.asList(64, 94, 58, 1, 69, 82, 93, 65, 76, 96));
 
     @Test
-    public void testConstructor() {
-        SLL<Integer> list = new SLL<Integer>();
+    public void testConstructorNoArg() {
+        CSLL<Integer> list = new CSLL<>();
 
         assertNull("Head should be null", list.getHead());
         assertNull("Tail should be null", list.getTail());
         assertEquals("Size should be 0", 0, list.getSize());
-        assertFalse("List should not be sorted", list.isSorted());
+        assertFalse("Sorted should be false", list.isSorted());
     }
 
     @Test
     public void testConstructorWithData() {
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<>(new SNode<Integer>(1));
 
         assertEquals("Head should be 1", 1, (int) list.getHead().getValue());
         assertEquals("Tail should be 1", 1, (int) list.getTail().getValue());
+        assertEquals("The tail should point to the head", list.getHead(), list.getTail().getNext());
         assertEquals("Size should be 1", 1, list.getSize());
-        assertFalse("List should not be sorted", list.isSorted());
+        assertFalse("Sorted should be false", list.isSorted());
     }
 
     @Test
     public void testGetHead() {
-        SLL<Integer> list1 = new SLL<Integer>();
+        CSLL<Integer> list1 = new CSLL<Integer>();
         assertNull("Head should be null", list1.getHead());
 
-        SLL<Integer> list2 = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list2 = new CSLL<Integer>(new SNode<Integer>(1));
         assertEquals("Head should be 1", 1, (int) list2.getHead().getValue());
 
     }
 
     @Test
     public void testGetTail() {
-        SLL<Integer> list1 = new SLL<Integer>();
+        CSLL<Integer> list1 = new CSLL<Integer>();
         assertNull("Tail should be null", list1.getTail());
 
-        SLL<Integer> list2 = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list2 = new CSLL<Integer>(new SNode<Integer>(1));
         assertEquals("Tail should be 1", 1, (int) list2.getTail().getValue());
     }
 
     @Test
     public void testGetSize() {
-        SLL<Integer> list1 = new SLL<Integer>();
+        CSLL<Integer> list1 = new CSLL<Integer>();
         assertEquals("Size should be 0", 0, list1.getSize());
 
-        SLL<Integer> list2 = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list2 = new CSLL<Integer>(new SNode<Integer>(1));
         assertEquals("Size should be 1", 1, list2.getSize());
     }
 
     @Test
     public void testIsSorted() {
-        SLL<Integer> list1 = new SLL<Integer>(new SNode<Integer>(1));
-        list1.insertHead(new SNode<Integer>(2));
-        list1.insertHead(new SNode<Integer>(4));
-        list1.insertHead(new SNode<Integer>(3));
+        CSLL<Integer> list1 = new CSLL<Integer>();
         assertFalse("List should not be sorted", list1.isSorted());
     }
 
     @Test
-    public void testInsertHead() {
-        SLL<Integer> list = new SLL<Integer>();
+    public void insertInsertHead() {
+        CSLL<Integer> list = new CSLL<Integer>();
 
         for (int i = 0; i < DUMMY_DATA.size(); i++) {
             list.insertHead(new SNode<Integer>(DUMMY_DATA.get(i)));
@@ -80,11 +78,12 @@ public class SLLTest {
         assertEquals("Tail should be 64", 64, (int) list.getTail().getValue());
         assertEquals("Size should be 10", 10, list.getSize());
         assertFalse("List should not be sorted", list.isSorted());
+
     }
 
     @Test
-    public void testInsertTail() {
-        SLL<Integer> list = new SLL<Integer>();
+    public void insertInsertTail() {
+        CSLL<Integer> list = new CSLL<Integer>();
 
         for (int i = 0; i < DUMMY_DATA.size(); i++) {
             list.insertTail(new SNode<Integer>(DUMMY_DATA.get(i)));
@@ -101,7 +100,7 @@ public class SLLTest {
         ArrayList<Integer> expected = new ArrayList<Integer>(
                 Arrays.asList(1, 2, 4, 3));
 
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.insert(new SNode<Integer>(2), 1);
         list.insert(new SNode<Integer>(3), 2);
         list.insert(new SNode<Integer>(4), 2);
@@ -121,7 +120,7 @@ public class SLLTest {
 
     @Test
     public void testInsertAtInvalidPosition() {
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         boolean exceptionCaught = false;
         try {
             list.insert(new SNode<Integer>(2), 10);
@@ -142,7 +141,7 @@ public class SLLTest {
         ArrayList<Integer> expected = new ArrayList<Integer>(
                 Arrays.asList(1, 2, 3, 4));
 
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.sortedInsert(new SNode<Integer>(3));
         list.sortedInsert(new SNode<Integer>(4));
         list.sortedInsert(new SNode<Integer>(2));
@@ -160,8 +159,8 @@ public class SLLTest {
     }
 
     @Test
-    public void testSearchWithValidNode() {
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+    public void testSearchWithValiSNode() {
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         SNode<Integer> nodeToCheck = new SNode<Integer>(4);
         list.insert(new SNode<Integer>(2), 1);
         list.insert(nodeToCheck, 2);
@@ -173,8 +172,8 @@ public class SLLTest {
     }
 
     @Test
-    public void testSearchWithInvalidNode() {
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+    public void testSearchWithInvaliSNode() {
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         SNode<Integer> nodeToCheck = new SNode<Integer>(4);
 
         list.insert(new SNode<Integer>(2), 1);
@@ -187,7 +186,7 @@ public class SLLTest {
 
     @Test
     public void testDeleteHead() {
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.insertHead(new SNode<Integer>(2));
 
         list.deleteHead();
@@ -197,7 +196,7 @@ public class SLLTest {
 
     @Test
     public void testDeleteTail() {
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.insertHead(new SNode<Integer>(2));
 
         list.deleteTail();
@@ -207,7 +206,7 @@ public class SLLTest {
 
     @Test
     public void testDeleteNode() {
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         SNode<Integer> nodeToDelete = new SNode<Integer>(2);
         list.insert(nodeToDelete, 1);
 
@@ -221,7 +220,7 @@ public class SLLTest {
         ArrayList<Integer> expected = new ArrayList<Integer>(
                 Arrays.asList(1, 2, 3, 4));
 
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.insert(new SNode<Integer>(3), 1);
         list.insert(new SNode<Integer>(4), 2);
         list.insert(new SNode<Integer>(2), 1);
@@ -243,7 +242,7 @@ public class SLLTest {
 
     @Test
     public void testClear() {
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.insert(new SNode<Integer>(2), 1);
         list.insert(new SNode<Integer>(3), 2);
         list.insert(new SNode<Integer>(4), 2);
@@ -258,7 +257,7 @@ public class SLLTest {
 
     @Test
     public void testPrint() {
-        SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
+        CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.insert(new SNode<Integer>(2), 1);
         list.insert(new SNode<Integer>(3), 2);
         list.insert(new SNode<Integer>(4), 2);

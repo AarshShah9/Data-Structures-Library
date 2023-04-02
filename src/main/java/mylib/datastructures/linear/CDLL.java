@@ -11,8 +11,8 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
         sorted = false;
     }
 
-    public CDLL(T data) {
-        head = new DNode<T>(data);
+    public CDLL(DNode<T> node) {
+        head = node;
         head.setNext(head);
         head.setPrevious(head);
         tail = head;
