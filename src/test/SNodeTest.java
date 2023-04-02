@@ -10,10 +10,18 @@ import java.util.*;
 public class SNodeTest {
 
     @Test
-    public void testConstructor() {
+    public void testConstructorGoodValue() {
         SNode<Integer> node = new SNode<>(1);
 
         assertEquals(1, node.getValue());
+        assertNull(node.getNext());
+    }
+
+    @Test
+    public void testConstructorBadValue() {
+        SNode<Integer> node = new SNode<>(null);
+
+        assertNull(node.getValue());
         assertNull(node.getNext());
     }
 

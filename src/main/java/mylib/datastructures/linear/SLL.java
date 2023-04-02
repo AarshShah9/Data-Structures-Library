@@ -98,6 +98,7 @@ public class SLL<T extends Comparable<T>> {
             node.setNext(current.getNext());
             current.setNext(node);
         }
+        size++;
     }
 
     // TODO SHOULD THIS CHECK FOR REFERENCES OR VALUES?
