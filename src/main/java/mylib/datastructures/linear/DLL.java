@@ -16,8 +16,8 @@ public class DLL<T extends Comparable<T>> {
 
     }
 
-    public DLL(T data) {
-        head = new DNode<T>(data);
+    public DLL(DNode<T> node) {
+        head = node;
         tail = head;
         size = 1;
         sorted = false;
@@ -68,7 +68,9 @@ public class DLL<T extends Comparable<T>> {
     }
 
     public void insert(DNode<T> node, int position) {
-        if (position == 0) {
+        if (position < 0 || position > size) {
+            throw new IndexOutOfBoundsException("Position is out of bounds");
+        } else if (position == 0) {
             insertHead(node);
         } else if (position == size) {
             insertTail(node);
@@ -114,6 +116,7 @@ public class DLL<T extends Comparable<T>> {
                 insertTail(node);
             }
         }
+
     }
 
     public DNode<T> search(DNode<T> node) {

@@ -4,7 +4,6 @@ import main.java.mylib.datastructures.nodes.*;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-import java.util.*;
 
 public class TNodeTest {
 
@@ -151,7 +150,6 @@ public class TNodeTest {
     @Test
     public void testToString() {
         TNode<Integer> node = new TNode<>(1, 0, null, null, null);
-
         assertEquals("toString doesn't work", "1", node.toString());
     }
 

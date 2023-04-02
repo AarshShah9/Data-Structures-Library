@@ -16,8 +16,8 @@ public class SLL<T extends Comparable<T>> {
         sorted = false;
     }
 
-    public SLL(T data) {
-        head = new SNode<T>(data);
+    public SLL(SNode<T> node) {
+        head = node;
         tail = head;
         size = 1;
         sorted = false;
@@ -65,8 +65,8 @@ public class SLL<T extends Comparable<T>> {
 
     public void insert(SNode<T> node, int position) {
 
-        if (position > size) {
-            throw new IndexOutOfBoundsException("Position is greater than size");
+        if (position < 0 || position > size) {
+            throw new IndexOutOfBoundsException("Position is out of bounds");
         } else if (position == 0) {
             insertHead(node);
         } else if (position == size) {
