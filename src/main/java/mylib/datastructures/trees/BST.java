@@ -2,6 +2,7 @@ package main.java.mylib.datastructures.trees;
 
 import java.util.ArrayList;
 
+import main.java.mylib.datastructures.linear.QueueLL;
 import main.java.mylib.datastructures.nodes.TNode;
 
 public class BST<T extends Comparable<T>> {
@@ -140,27 +141,51 @@ public class BST<T extends Comparable<T>> {
         return current;
     }
 
-    public void printInOrder() {
-        ArrayList<T> allData = new ArrayList<>();
-        if (root == null) {
-            System.out.println("Tree is empty.");
-            return;
-        }
-        // TODO: Implement in-order traversal
-        printData(allData);
-    }
-
     public void printBF() {
         ArrayList<T> allData = new ArrayList<>();
         if (root == null) {
             System.out.println("Tree is empty.");
             return;
         }
-        // TODO: Implement breadth-first traversal
+
+        QueueLL<TNode<T>> queue = new QueueLL<>();
+        queue.enqueue(root);
+
+        while (!queue.empty()) {
+            TNode<T> node = queue.dequeue();
+            allData.add(node.getValue());
+
+            if (node.getLeft() != null) {
+                queue.enqueue(node.getLeft());
+            }
+            if (node.getRight() != null) {
+                queue.enqueue(node.getRight());
+            }
+        }
+
         printData(allData);
     }
 
-    public void printData(ArrayList<T> allData) {
+    public void printInOrder() {
+        ArrayList<T> allData = new ArrayList<>();
+        if (root == null) {
+            System.out.println("Tree is empty.");
+            return;
+        }
+        traverseInOrder(root, allData);
+        printData(allData);
+    }
+
+    private void traverseInOrder(TNode<T> node, ArrayList<T> allData) {
+        if (node == null) {
+            return;
+        }
+        traverseInOrder(node.getLeft(), allData);
+        allData.add(node.getValue());
+        traverseInOrder(node.getRight(), allData);
+    }
+
+    private void printData(ArrayList<T> allData) {
         for (T data : allData) {
             System.out.print(data + " ");
         }
