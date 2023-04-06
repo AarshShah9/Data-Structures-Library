@@ -140,11 +140,13 @@ public class CSLLTest {
     @Test
     public void testSortedInsert() {
         ArrayList<Integer> expected = new ArrayList<Integer>(
-                Arrays.asList(1, 2, 3, 4));
+                Arrays.asList(0, 1, 2, 3, 4, 5));
 
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.sortedInsert(new SNode<Integer>(3));
+        list.insertHead(new SNode<Integer>(0));
         list.sortedInsert(new SNode<Integer>(4));
+        list.insertTail(new SNode<Integer>(5));
         list.sortedInsert(new SNode<Integer>(2));
 
         boolean valid = true;
@@ -156,7 +158,13 @@ public class CSLLTest {
             }
         }
 
-        assertTrue("Sorted insert is not working as it should", valid);
+        assertTrue("Sort is not working as it should", valid);
+        assertTrue("List should be sorted", list.isSorted());
+        assertTrue("Head should be 0", 0 == list.getHead().getValue());
+        assertTrue("Tail should be 5", 5 == list.getTail().getValue());
+        assertTrue("Size should be 6", 6 == list.getSize());
+        assertTrue("Tail next should be head", list.getTail().getNext() == list
+                .getHead());
     }
 
     @Test
@@ -223,12 +231,14 @@ public class CSLLTest {
     @Test
     public void testSort() {
         ArrayList<Integer> expected = new ArrayList<Integer>(
-                Arrays.asList(1, 2, 3, 4));
+                Arrays.asList(0, 1, 2, 3, 4, 5));
 
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
-        list.insert(new SNode<Integer>(3), 1);
-        list.insert(new SNode<Integer>(4), 2);
-        list.insert(new SNode<Integer>(2), 1);
+        list.sortedInsert(new SNode<Integer>(3));
+        list.insertHead(new SNode<Integer>(0));
+        list.sortedInsert(new SNode<Integer>(4));
+        list.insertTail(new SNode<Integer>(5));
+        list.sortedInsert(new SNode<Integer>(2));
 
         list.sort();
 
@@ -243,9 +253,9 @@ public class CSLLTest {
 
         assertTrue("Sort is not working as it should", valid);
         assertTrue("List should be sorted", list.isSorted());
-        assertTrue("Head should be 1", 1 == list.getHead().getValue());
-        assertTrue("Tail should be 4", 4 == list.getTail().getValue());
-        assertTrue("Size should be 4", 4 == list.getSize());
+        assertTrue("Head should be 0", 0 == list.getHead().getValue());
+        assertTrue("Tail should be 5", 5 == list.getTail().getValue());
+        assertTrue("Size should be 6", 6 == list.getSize());
         assertTrue("Tail next should be head", list.getTail().getNext() == list
                 .getHead());
     }

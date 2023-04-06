@@ -233,10 +233,10 @@ public class BSTTest {
         bst.insert(2);
         bst.insert(4);
 
+        System.out.println("Test print statements manually");
         bst.printInOrder();
         bst.printBF();
 
-        System.out.println("Test print statements manually");
     }
 
 }
