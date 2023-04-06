@@ -58,6 +58,14 @@ public class DLLTest {
 
         DLL<Integer> list2 = new DLL<Integer>(new DNode<Integer>(1));
         assertEquals("Size should be 1", 1, list2.getSize());
+
+        DLL<Integer> list3 = new DLL<Integer>();
+        for (int i = 0; i < DUMMY_DATA.size(); i++) {
+            list3.insertHead(new DNode<Integer>(DUMMY_DATA.get(i)));
+        }
+        list3.insertTail(new DNode<Integer>(1));
+        list3.sortedInsert(new DNode<Integer>(2));
+        assertEquals("Size should be 12", 12, list3.getSize());
     }
 
     @Test
@@ -156,6 +164,33 @@ public class DLLTest {
         }
 
         assertTrue("Sorted insert is not working as it should", valid);
+        assertTrue("List should be sorted", list.isSorted());
+        assertTrue("List should 4 elements", list.getSize() == 4);
+        assertTrue("Tail should be 4", list.getTail().getValue() == 4);
+        assertTrue("Head should be 1", list.getHead().getValue() == 1);
+
+        ArrayList<Integer> expected2 = new ArrayList<Integer>(
+                Arrays.asList(2, 3, 4));
+        DLL<Integer> list2 = new DLL<Integer>();
+        list2.sortedInsert(new DNode<Integer>(3));
+        list2.sortedInsert(new DNode<Integer>(4));
+        list2.sortedInsert(new DNode<Integer>(2));
+
+        boolean valid2 = true;
+        int i2 = 0;
+        for (DNode<Integer> node = list.getHead(); node != null; node = node.getNext(), i2++) {
+            if (node.getValue() != expected2.get(i2)) {
+                valid2 = false;
+                break;
+            }
+        }
+
+        assertTrue("Sorted insert is not working as it should", valid2);
+        assertTrue("List should be sorted", list2.isSorted());
+        assertTrue("List should 3 elements", list2.getSize() == 3);
+        assertTrue("Tail should be 4", list.getTail().getValue() == 4);
+        assertTrue("Head should be 2", list.getHead().getValue() == 1);
+
     }
 
     @Test

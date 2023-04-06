@@ -39,13 +39,16 @@ public class TNodeTest {
         TNode<Integer> rightNode = new TNode<>(3, 0, null, null, null);
         TNode<Integer> parentNode = new TNode<>(2, 0, null, leftNode, rightNode);
 
-        TNode<Integer> node = new TNode<>(null, 0, parentNode, leftNode, rightNode);
+        boolean exceptionThrown = false;
+        try {
+            TNode<Integer> node = new TNode<>(null, 0, parentNode, leftNode, rightNode);
+        } catch (IllegalArgumentException e) {
+            exceptionThrown = true;
+        } catch (Exception e) {
+        }
 
-        assertNull("Left should be null", node.getLeft());
-        assertNull("Right should be null", node.getRight());
-        assertNull("Parent should be null", node.getParent());
-        assertEquals("Balance should be 0", 0, node.getBalance());
-        assertNull("Value should be null", node.getValue());
+        assertTrue("IllegalArgumentException should be thrown", exceptionThrown);
+
     }
 
     @Test

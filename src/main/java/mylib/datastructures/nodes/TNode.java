@@ -15,7 +15,10 @@ public class TNode<T> {
         this.balance = 0;
     }
 
-    public TNode(T value, int balance, TNode<T> p, TNode<T> l, TNode<T> r) {
+    public TNode(T value, int balance, TNode<T> p, TNode<T> l, TNode<T> r) throws IllegalArgumentException {
+        if (value == null) {
+            throw new IllegalArgumentException("Value cannot be null");
+        }
         this.value = value;
         this.balance = balance;
         this.parent = p;

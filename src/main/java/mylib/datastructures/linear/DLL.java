@@ -95,6 +95,8 @@ public class DLL<T extends Comparable<T>> {
         }
         if (head == null) {
             head = node;
+            tail = head;
+            size++;
         } else {
             DNode<T> current = head;
             while (current != null) {
@@ -120,9 +122,19 @@ public class DLL<T extends Comparable<T>> {
     }
 
     public DNode<T> search(DNode<T> node) {
-        DNode<T> current = head;
+        if (head == null) {
+            return null;
+        }
+        if (head == node) {
+            return head;
+        }
+        if (tail == node) {
+            return tail;
+        }
+
+        DNode<T> current = head.getNext();
         while (current != null) {
-            if (current.getValue().equals(node.getValue())) {
+            if (current == node) {
                 return current;
             }
             current = current.getNext();
@@ -206,7 +218,7 @@ public class DLL<T extends Comparable<T>> {
         System.out.print("Sort Status: " + sorted);
         System.out.print("List Values: ");
         DNode<T> current = head;
-        while (current != null) {
+        while (current != tail) {
             System.out.print(current.getValue() + " ");
             current = current.getNext();
         }

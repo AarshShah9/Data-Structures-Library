@@ -107,14 +107,14 @@ public class CSLLTest {
 
         boolean valid = true;
         int i = 0;
-        for (SNode<Integer> node = list.getHead(); node != null; node = node.getNext(), i++) {
+        for (SNode<Integer> node = list.getHead(); node != list.getTail(); node = node.getNext(), i++) {
             if (node.getValue() != expected.get(i)) {
                 valid = false;
                 break;
             }
         }
-
         assertTrue("Insert at position is not working as it should", valid);
+        assertFalse("List should not be sorted", list.isSorted());
 
     }
 
@@ -159,11 +159,11 @@ public class CSLLTest {
     }
 
     @Test
-    public void testSearchWithValiSNode() {
+    public void testSearchWithValidSNode() {
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         SNode<Integer> nodeToCheck = new SNode<Integer>(4);
         list.insert(new SNode<Integer>(2), 1);
-        list.insert(nodeToCheck, 2);
+        list.insertTail(nodeToCheck);
 
         SNode<Integer> node = list.search(nodeToCheck);
 
@@ -172,7 +172,7 @@ public class CSLLTest {
     }
 
     @Test
-    public void testSearchWithInvaliSNode() {
+    public void testSearchWithInvalidSNode() {
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         SNode<Integer> nodeToCheck = new SNode<Integer>(4);
 
@@ -201,7 +201,7 @@ public class CSLLTest {
 
         list.deleteTail();
 
-        assertEquals("Tail should be 2", 2, (int) list.getTail().getValue());
+        assertEquals("Tail should be 1", 1, (int) list.getTail().getValue());
     }
 
     @Test

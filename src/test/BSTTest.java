@@ -141,6 +141,21 @@ public class BSTTest {
     }
 
     @Test
+    public void testBalanceFactors() {
+        BST<Integer> bst = new BST<>();
+
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        bst.insert(4);
+        bst.insert(6);
+
+        assertEquals("The root's balance factor should be 0", 0, bst.getRoot().getBalance());
+        assertEquals("The root's left child's balance factor should be 1", 1, bst.getRoot().getLeft().getBalance());
+        assertEquals("The root's right child's balance factor should be -1", -1, bst.getRoot().getRight().getBalance());
+    }
+
+    @Test
     public void testDelete() {
         BST<Integer> bst = new BST<>();
 
@@ -155,6 +170,68 @@ public class BSTTest {
         assertEquals("The roots left child's right child should become 4", 4,
                 (int) bst.getRoot().getLeft().getRight().getValue());
 
+        bst.delete(5);
+        assertEquals("The root should become 4", 4, (int) bst.getRoot().getValue());
+        assertEquals("The roots right child should become 7", 7, (int) bst.getRoot().getRight().getValue());
+        assertEquals("The roots left child should become 2", 2, (int) bst.getRoot().getLeft().getValue());
+
+        bst.delete(7);
+        assertEquals("The roots left child should stay 2", 2, (int) bst.getRoot().getLeft().getValue());
+        assertNull("The roots right child's should be null", bst.getRoot().getRight());
+
+        bst.delete(4);
+        assertEquals("The root should become 2", 2, (int) bst.getRoot().getValue());
+
+        BST<Integer> bst2 = new BST<>();
+
+        bst2.insert(13);
+        bst2.insert(9);
+        bst2.insert(4);
+        bst2.insert(10);
+        bst2.insert(2);
+        bst2.insert(15);
+        bst2.insert(20);
+
+        bst2.delete(0);
+        assertEquals("The root should stay 13", 13, (int) bst2.getRoot().getValue());
+
+        bst2.delete(13);
+        assertEquals("The root should become 10", 10, (int) bst2.getRoot().getValue());
+
+    }
+
+    @Test
+    public void testSearch() {
+        BST<Integer> bst = new BST<>();
+
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        bst.insert(2);
+        bst.insert(4);
+
+        assertEquals("The search should return 5", 5, (int) bst.search(5).getValue());
+        assertEquals("The search should return 3", 3, (int) bst.search(3).getValue());
+        assertEquals("The search should return 7", 7, (int) bst.search(7).getValue());
+        assertEquals("The search should return 2", 2, (int) bst.search(2).getValue());
+        assertEquals("The search should return 4", 4, (int) bst.search(4).getValue());
+        assertNull("The search should return null", bst.search(6));
+    }
+
+    @Test
+    public void testPrints() {
+        BST<Integer> bst = new BST<>();
+
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        bst.insert(2);
+        bst.insert(4);
+
+        bst.printInOrder();
+        bst.printBF();
+
+        System.out.println("Test print statements manually");
     }
 
 }
