@@ -163,7 +163,6 @@ public class SLLTest {
                 break;
             }
         }
-
         assertTrue("Sorted insert is not working as it should", valid);
     }
 

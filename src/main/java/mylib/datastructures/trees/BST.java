@@ -138,9 +138,6 @@ public class BST<T extends Comparable<T>> {
 
     private TNode<T> findMinNode(TNode<T> node) {
         TNode<T> current = node;
-        while (current.getLeft() != null) {
-            current = current.getLeft();
-        }
         while (current.getRight() != null) {
             current = current.getRight();
         }

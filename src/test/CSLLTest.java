@@ -98,12 +98,13 @@ public class CSLLTest {
     @Test
     public void testInsertAtPosition() {
         ArrayList<Integer> expected = new ArrayList<Integer>(
-                Arrays.asList(1, 2, 4, 3));
+                Arrays.asList(1, 2, 4, 3, 5));
 
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.insert(new SNode<Integer>(2), 1);
         list.insert(new SNode<Integer>(3), 2);
         list.insert(new SNode<Integer>(4), 2);
+        list.insert(new SNode<Integer>(5), 4);
 
         boolean valid = true;
         int i = 0;

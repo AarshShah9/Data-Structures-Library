@@ -61,7 +61,7 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
         }
         if (position == 0) {
             insertHead(node);
-        } else if (position == size - 1) {
+        } else if (position == size) {
             insertTail(node);
         } else {
             SNode<T> current = head;

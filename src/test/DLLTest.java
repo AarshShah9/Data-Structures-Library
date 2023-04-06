@@ -178,7 +178,7 @@ public class DLLTest {
 
         boolean valid2 = true;
         int i2 = 0;
-        for (DNode<Integer> node = list.getHead(); node != null; node = node.getNext(), i2++) {
+        for (DNode<Integer> node = list2.getHead(); node != null; node = node.getNext(), i2++) {
             if (node.getValue() != expected2.get(i2)) {
                 valid2 = false;
                 break;
