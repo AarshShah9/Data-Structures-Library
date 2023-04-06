@@ -221,7 +221,6 @@ public class SLLTest {
         list.insert(nodeToDelete, 1);
 
         list.delete(nodeToDelete);
-
         assertNull("Node should be deleted", list.search(nodeToDelete));
     }
 

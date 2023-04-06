@@ -124,7 +124,7 @@ public class SLL<T extends Comparable<T>> {
             return tail;
         }
 
-        SNode<T> current = head.getNext();
+        SNode<T> current = head;
         while (current != null) {
             if (current == node) {
                 return current;
@@ -161,6 +161,8 @@ public class SLL<T extends Comparable<T>> {
         if (head != null) {
             if (head == node) {
                 deleteHead();
+            } else if (tail == node) {
+                deleteTail();
             } else {
                 SNode<T> current = head;
                 while (current.getNext() != node) {

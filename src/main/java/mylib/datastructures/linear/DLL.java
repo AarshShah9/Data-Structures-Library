@@ -95,6 +95,8 @@ public class DLL<T extends Comparable<T>> {
         }
         if (head == null) {
             head = node;
+            tail = head;
+            size++;
         } else {
             DNode<T> current = head;
             while (current != null) {
