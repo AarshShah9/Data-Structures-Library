@@ -28,7 +28,6 @@ public class BST<T extends Comparable<T>> {
         this.root = root;
     }
 
-    // TODO Fix this method - calculate balance factor after each insertion
     public void insert(T data) {
         if (root == null) {
             root = new TNode<>(data, 0, null, null, null);
@@ -48,10 +47,10 @@ public class BST<T extends Comparable<T>> {
             } else {
                 parent.setRight(new TNode<>(data, 0, parent, null, null));
             }
+            setBalanceFactorForTree();
         }
     }
 
-    // TODO Fix this method - calculate balance factor after each insertion
     public void insert(TNode<T> node) {
         if (root == null) {
             root = node;
@@ -71,11 +70,11 @@ public class BST<T extends Comparable<T>> {
             } else {
                 parent.setRight(node);
             }
-        }
+            setBalanceFactorForTree();
 
+        }
     }
 
-    // TODO Fix this method
     public void delete(T data) {
         TNode<T> node = search(data);
         if (node == null) {
@@ -108,7 +107,7 @@ public class BST<T extends Comparable<T>> {
             }
         } else {
             // Case 3: Node has two children
-            TNode<T> successor = findMinNode(node.getRight());
+            TNode<T> successor = findMinNode(node.getLeft());
             node.setValue(successor.getValue());
             if (successor.getParent().getLeft() == successor) {
                 successor.getParent().setLeft(successor.getRight());
@@ -119,6 +118,7 @@ public class BST<T extends Comparable<T>> {
                 successor.getRight().setParent(successor.getParent());
             }
         }
+        setBalanceFactorForTree();
     }
 
     public TNode<T> search(T data) {
@@ -140,6 +140,9 @@ public class BST<T extends Comparable<T>> {
         TNode<T> current = node;
         while (current.getLeft() != null) {
             current = current.getLeft();
+        }
+        while (current.getRight() != null) {
+            current = current.getRight();
         }
         return current;
     }
@@ -195,8 +198,32 @@ public class BST<T extends Comparable<T>> {
         System.out.println();
     }
 
-    private void calculateBalanceFactor(TNode<T> node) {
-        // TODO implement
+    private void setBalanceFactorForTree() {
+        if (root == null) {
+            return;
+        }
+        QueueLL<TNode<T>> queue = new QueueLL<>();
+        queue.enqueue(root);
+
+        while (!queue.empty()) {
+            TNode<T> node = queue.dequeue();
+            node.setBalance(getHeight(node.getRight()) - getHeight(node.getLeft()));
+
+            if (node.getLeft() != null) {
+                queue.enqueue(node.getLeft());
+            }
+            if (node.getRight() != null) {
+                queue.enqueue(node.getRight());
+            }
+        }
+
+    }
+
+    private int getHeight(TNode<T> node) {
+        if (node == null) {
+            return -1;
+        }
+        return 1 + Math.max(getHeight(node.getLeft()), getHeight(node.getRight()));
     }
 
 }

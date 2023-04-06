@@ -57,6 +57,14 @@ public class SLLTest {
 
         SLL<Integer> list2 = new SLL<Integer>(new SNode<Integer>(1));
         assertEquals("Size should be 1", 1, list2.getSize());
+
+        SLL<Integer> list3 = new SLL<Integer>();
+        for (int i = 0; i < DUMMY_DATA.size(); i++) {
+            list3.insertHead(new SNode<Integer>(DUMMY_DATA.get(i)));
+        }
+        list3.insertTail(new SNode<Integer>(1));
+        list3.sortedInsert(new SNode<Integer>(2));
+        assertEquals("Size should be 12", 12, list3.getSize());
     }
 
     @Test
@@ -199,10 +207,11 @@ public class SLLTest {
     public void testDeleteTail() {
         SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
         list.insertHead(new SNode<Integer>(2));
+        list.insertHead(new SNode<Integer>(3));
+        list.insertHead(new SNode<Integer>(4));
 
         list.deleteTail();
-
-        assertEquals("Tail should be 2", 2, (int) list.getTail().getValue());
+        assertEquals("Tail should be 1", 1, (int) list.getTail().getValue());
     }
 
     @Test
@@ -212,7 +221,6 @@ public class SLLTest {
         list.insert(nodeToDelete, 1);
 
         list.delete(nodeToDelete);
-
         assertNull("Node should be deleted", list.search(nodeToDelete));
     }
 

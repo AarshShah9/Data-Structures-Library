@@ -1,8 +1,8 @@
 package test;
 
-import main.java.mylib.datastructures.nodes.SNode;
-
 import org.junit.*;
+
+import main.java.mylib.datastructures.nodes.SNode;
 
 import static org.junit.Assert.*;
 

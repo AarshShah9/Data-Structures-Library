@@ -43,6 +43,9 @@ public class SLL<T extends Comparable<T>> {
     public void insertHead(SNode<T> node) {
         if (head == null) {
             head = node;
+            tail = head;
+            size++;
+
         } else {
             node.setNext(head);
             head = node;
@@ -55,6 +58,9 @@ public class SLL<T extends Comparable<T>> {
     public void insertTail(SNode<T> node) {
         if (head == null) {
             head = node;
+            tail = head;
+            size++;
+
         } else {
             tail.setNext(node);
             tail = node;
@@ -89,6 +95,7 @@ public class SLL<T extends Comparable<T>> {
         }
         if (head == null) {
             head = node;
+            tail = head;
         } else if (((Comparable<T>) head.getValue()).compareTo(node.getValue()) < 0) {
             node.setNext(head);
             head = node;
@@ -107,6 +114,15 @@ public class SLL<T extends Comparable<T>> {
 
     // TODO SHOULD THIS CHECK FOR REFERENCES OR VALUES?
     public SNode<T> search(SNode<T> node) {
+        if (head == null) {
+            return null;
+        }
+        if (head == node) {
+            return head;
+        }
+        if (tail == node) {
+            return tail;
+        }
 
         SNode<T> current = head;
         while (current != null) {
@@ -145,6 +161,8 @@ public class SLL<T extends Comparable<T>> {
         if (head != null) {
             if (head == node) {
                 deleteHead();
+            } else if (tail == node) {
+                deleteTail();
             } else {
                 SNode<T> current = head;
                 while (current.getNext() != node) {
@@ -189,7 +207,7 @@ public class SLL<T extends Comparable<T>> {
         System.out.print("Sort Status: " + this.sorted);
         System.out.print("List Values: ");
         SNode<T> current = head;
-        while (current != null) {
+        while (current != tail) {
             System.out.print(current.getValue() + " ");
             current = current.getNext();
         }
