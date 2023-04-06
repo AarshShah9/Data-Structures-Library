@@ -82,20 +82,51 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
         }
         if (head == null) {
             head = node;
-            head.setNext(head);
-        } else if (node.getValue().compareTo(head.getValue()) < 0) {
-            insertHead(node);
-        } else if (node.getValue().compareTo(getTail().getValue()) > 0) {
-            insertTail(node);
+            tail = head;
+        } else if (((Comparable<T>) head.getValue()).compareTo(node.getValue()) > 0) {
+            node.setNext(head);
+            head = node;
+        } else if (((Comparable<T>) tail.getValue()).compareTo(node.getValue()) < 0) {
+            tail.setNext(node);
+            tail = node;
+            tail.setNext(head);
         } else {
             SNode<T> current = head;
-            while (node.getValue().compareTo(current.getNext().getValue()) > 0) {
+            while (current.getNext() != null
+                    && ((Comparable<T>) current.getNext().getValue()).compareTo(node.getValue()) < 0) {
                 current = current.getNext();
             }
             node.setNext(current.getNext());
             current.setNext(node);
-            size++;
         }
+        size++;
+        sorted = true;
+    }
+
+    @Override
+    public void sort() {
+        if (head == null || head.getNext() == null) {
+            sorted = true;
+            return; // List is already sorted
+        } else {
+            sortedHead = null;
+            SNode<T> current = head;
+            while (current != null) {
+
+                SNode<T> next = current.getNext();
+                sortedInsertHelper(current);
+                current = next;
+            }
+        }
+        head = sortedHead;
+        sortedHead = null;
+        SNode<T> current = head;
+        while (current.getNext() != null) {
+            current = current.getNext();
+        }
+        tail = current;
+        tail.setNext(head);
+        sorted = true; // Update sort status
 
     }
 
@@ -134,37 +165,6 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
                 size--;
             }
         }
-    }
-
-    @Override
-    public void sort() {
-        if (head == null || head.getNext() == head) {
-            // List is empty or contains only one element, no need to sort
-            return;
-        }
-
-        SNode<T> lastSorted = head; // last sorted node
-        SNode<T> current = lastSorted.getNext(); // current node to be sorted
-        while (current != head) {
-            if (current.getValue().compareTo(lastSorted.getValue()) >= 0) {
-                // current node is already in the correct position
-                lastSorted = current;
-            } else {
-                // find the correct position for current node by traversing the sorted portion
-                // of the list
-                SNode<T> prev = lastSorted;
-                while (prev.getNext() != head && prev.getNext().getValue().compareTo(current.getValue()) < 0) {
-                    prev = prev.getNext();
-                }
-                // remove current node from its current position
-                lastSorted.setNext(current.getNext());
-                // insert current node into its correct position
-                current.setNext(prev.getNext());
-                prev.setNext(current);
-            }
-            current = lastSorted.getNext(); // move to next node to be sorted
-        }
-        sorted = true; // set sorted flag to true
     }
 
     @Override

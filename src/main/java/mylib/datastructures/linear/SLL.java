@@ -156,7 +156,7 @@ public class SLL<T extends Comparable<T>> {
         }
     }
 
-    private void sortedInsertHelper(SNode<T> node) {
+    protected void sortedInsertHelper(SNode<T> node) {
         if (sortedHead == null || sortedHead.getValue().compareTo(node.getValue()) > 0) {
             node.setNext(sortedHead);
             sortedHead = node;
