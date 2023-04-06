@@ -3,7 +3,6 @@ package main.java.mylib.datastructures.linear;
 import main.java.mylib.datastructures.nodes.SNode;
 
 public class QueueLL<T extends Comparable<T>> extends SLL<T> {
-    private SNode<T> tail;
 
     public QueueLL() {
         super();
@@ -12,7 +11,6 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
 
     public QueueLL(SNode<T> node) {
         super(node);
-        tail = head;
     }
 
     public boolean empty() {
@@ -21,25 +19,25 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
 
     public void enqueue(SNode<T> node) {
         super.insertTail(node);
-        while (tail.getNext() != null) {
-            tail = tail.getNext();
-        }
     }
 
     public SNode<T> dequeue() {
         if (empty()) {
-            throw new RuntimeException("Queue is empty");
+            return null;
         }
         SNode<T> data = head;
         super.deleteHead();
+        if (head == null) {
+            tail = null;
+        }
         return data;
     }
 
-    public T peek() {
+    public SNode<T> peek() {
         if (empty()) {
-            throw new RuntimeException("Queue is empty");
+            return null;
         }
-        return head.getValue();
+        return head;
     }
 
     public int search(T data) {
@@ -68,7 +66,10 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
 
     @Override
     public void insertHead(SNode<T> node) {
+    }
 
+    @Override
+    public void deleteTail() {
     }
 
     @Override
@@ -77,6 +78,10 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
 
     @Override
     public void delete(SNode<T> node) {
+    }
+
+    @Override
+    public void sort() {
     }
 
     @Override
