@@ -10,8 +10,8 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
         top = null;
     }
 
-    public StackLL(T data) {
-        super(data);
+    public StackLL(SNode<T> node) {
+        super(node);
         top = head;
     }
 
@@ -19,8 +19,8 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
         return size == 0;
     }
 
-    public void push(T data) {
-        super.insertHead(data);
+    public void push(SNode<T> node) {
+        super.insertHead(node);
         SNode<T> current = head;
         while (current.getNext() != null) {
             current = current.getNext();
@@ -62,11 +62,28 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
     }
 
     @Override
+    public SNode<T> search(SNode<T> node) {
+        SNode<T> current = head;
+        while (current != null) {
+            if (current.getValue() == node.getValue()) {
+                return current;
+            }
+            current = current.getNext();
+        }
+        return null;
+    }
+
+    @Override
+    public void print() {
+
+    }
+
+    @Override
     public void insert(SNode<T> node, int position) {
     }
 
     @Override
-    public void insertHead(T data) {
+    public void insertHead(SNode<T> node) {
     }
 
     @Override
@@ -81,5 +98,4 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
     public void delete(SNode<T> node) {
     }
 
-    // Currently left sort and print as is, but they may need overriding
 }

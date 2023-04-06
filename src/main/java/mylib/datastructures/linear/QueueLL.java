@@ -10,8 +10,8 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
         tail = null;
     }
 
-    public QueueLL(T data) {
-        super(data);
+    public QueueLL(SNode<T> node) {
+        super(node);
         tail = head;
     }
 
@@ -19,18 +19,18 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
         return size == 0;
     }
 
-    public void enqueue(T data) {
-        super.insertTail(data);
+    public void enqueue(SNode<T> node) {
+        super.insertTail(node);
         while (tail.getNext() != null) {
             tail = tail.getNext();
         }
     }
 
-    public T dequeue() {
+    public SNode<T> dequeue() {
         if (empty()) {
             throw new RuntimeException("Queue is empty");
         }
-        T data = head.getValue();
+        SNode<T> data = head;
         super.deleteHead();
         return data;
     }
@@ -67,7 +67,8 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
     }
 
     @Override
-    public void insertHead(T data) {
+    public void insertHead(SNode<T> node) {
+
     }
 
     @Override
