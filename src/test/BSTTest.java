@@ -198,6 +198,11 @@ public class BSTTest {
         bst2.delete(13);
         assertEquals("The root should become 10", 10, (int) bst2.getRoot().getValue());
 
+        bst2.delete(15);
+        assertEquals("The root's right child should become 20", 20, (int) bst2.getRoot().getRight().getValue());
+
+        bst2.delete(9);
+        assertEquals("The root's left child should become 4", 4, (int) bst2.getRoot().getLeft().getValue());
     }
 
     @Test
@@ -228,10 +233,10 @@ public class BSTTest {
         bst.insert(2);
         bst.insert(4);
 
+        System.out.println("Test print statements manually");
         bst.printInOrder();
         bst.printBF();
 
-        System.out.println("Test print statements manually");
     }
 
 }

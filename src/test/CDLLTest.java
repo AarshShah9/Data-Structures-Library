@@ -170,6 +170,17 @@ public class CDLLTest {
         assertTrue("Sorted insert is not working as it should", valid);
         assertEquals("Size should be 4", 4, list.getSize());
         assertTrue("List should be sorted", list.isSorted());
+
+        DNode<Integer> node = list.getHead();
+        for (; node != list.getTail(); node = node.getNext()) {
+            if (node.getNext() == null || node.getNext().getPrevious() != node) {
+                valid = false;
+                break;
+            }
+        }
+
+        assertTrue("Doubly linked list is not doubly linked", valid);
+        assertEquals("List should be circular", list.getHead(), list.getTail().getNext());
     }
 
     @Test
@@ -232,18 +243,24 @@ public class CDLLTest {
     @Test
     public void testSort() {
         ArrayList<Integer> expected = new ArrayList<Integer>(
-                Arrays.asList(1, 2, 3, 4));
+                Arrays.asList(0, 1, 2, 3, 4, 5));
 
         CDLL<Integer> list = new CDLL<Integer>(new DNode<Integer>(1));
         list.insert(new DNode<Integer>(3), 1);
         list.insert(new DNode<Integer>(4), 2);
         list.insert(new DNode<Integer>(2), 1);
+        list.insertHead(new DNode<Integer>(5));
+        list.insertTail(new DNode<Integer>(0));
 
         list.sort();
 
         boolean valid = true;
-        int i = 0;
-        for (DNode<Integer> node = list.getHead(); node != null; node = node.getNext(), i++) {
+        if (list.getHead().getValue() != expected.get(0)) {
+            valid = false;
+        }
+        int i = 1;
+
+        for (DNode<Integer> node = list.getHead().getNext(); node != list.getHead(); node = node.getNext(), i++) {
             if (node.getValue() != expected.get(i)) {
                 valid = false;
                 break;
@@ -252,6 +269,20 @@ public class CDLLTest {
 
         assertTrue("Sort is not working as it should", valid);
         assertTrue("List should be sorted", list.isSorted());
+        assertTrue("Head should be 0", 0 == list.getHead().getValue());
+        assertTrue("Tail should be 5", 5 == list.getTail().getValue());
+        assertTrue("Size should be 6", 6 == list.getSize());
+
+        DNode<Integer> node = list.getHead();
+        for (; node != list.getTail(); node = node.getNext()) {
+            if (node.getNext() == null || node.getNext().getPrevious() != node) {
+                valid = false;
+                break;
+            }
+        }
+
+        assertTrue("Doubly linked list is not doubly linked", valid);
+        assertEquals("List should be circular", list.getHead(), list.getTail().getNext());
     }
 
     @Test
