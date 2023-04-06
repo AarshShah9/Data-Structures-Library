@@ -90,32 +90,6 @@ public class SLL<T extends Comparable<T>> {
         }
     }
 
-    public void sortedInsert(SNode<T> node) {
-        if (!sorted) {
-            sort();
-        }
-        if (head == null) {
-            head = node;
-            tail = head;
-        } else if (((Comparable<T>) head.getValue()).compareTo(node.getValue()) > 0) {
-            node.setNext(head);
-            head = node;
-        } else if (((Comparable<T>) tail.getValue()).compareTo(node.getValue()) < 0) {
-            tail.setNext(node);
-            tail = node;
-        } else {
-            SNode<T> current = head;
-            while (current.getNext() != null
-                    && ((Comparable<T>) current.getNext().getValue()).compareTo(node.getValue()) < 0) {
-                current = current.getNext();
-            }
-            node.setNext(current.getNext());
-            current.setNext(node);
-        }
-        size++;
-        sorted = true;
-    }
-
     // TODO SHOULD THIS CHECK FOR REFERENCES OR VALUES?
     public SNode<T> search(SNode<T> node) {
         if (head == null) {
@@ -181,6 +155,55 @@ public class SLL<T extends Comparable<T>> {
         }
     }
 
+    public void sortedInsert(SNode<T> node) {
+        if (!sorted) {
+            sort();
+        }
+        if (head == null) {
+            head = node;
+            tail = head;
+        } else if (((Comparable<T>) head.getValue()).compareTo(node.getValue()) > 0) {
+            node.setNext(head);
+            head = node;
+        } else if (((Comparable<T>) tail.getValue()).compareTo(node.getValue()) < 0) {
+            tail.setNext(node);
+            tail = node;
+        } else {
+            SNode<T> current = head;
+            while (current.getNext() != null
+                    && ((Comparable<T>) current.getNext().getValue()).compareTo(node.getValue()) < 0) {
+                current = current.getNext();
+            }
+            node.setNext(current.getNext());
+            current.setNext(node);
+        }
+        size++;
+        sorted = true;
+    }
+    // https://www.geeksforgeeks.org/insertion-sort-for-singly-linked-list/
+
+    // public void sort() {
+    // if (head == null || head.getNext() == null) {
+    // sorted = true;
+    // return; // List is already sorted
+    // }
+    // SNode<T> current = head.getNext();
+    // while (current != null) {
+    // SNode<T> temp = current;
+    // while (temp != null
+    // && ((Comparable<T>) temp.getValue()).compareTo(temp.getNext().getValue()) <
+    // 0) {
+    // // Swap nodes
+    // T tempValue = temp.getValue();
+    // temp.setValue(temp.getNext().getValue());
+    // temp.getNext().setValue(tempValue);
+    // temp = temp.getNext();
+    // }
+    // current = current.getNext();
+    // }
+    // sorted = true; // Update sort status
+    // // }
+
     public void sort() {
         if (head == null || head.getNext() == null) {
             sorted = true;
@@ -188,13 +211,14 @@ public class SLL<T extends Comparable<T>> {
         }
         SNode<T> current = head.getNext();
         while (current != null) {
-            SNode<T> temp = current;
-            while (temp != head && ((Comparable<T>) temp.getValue()).compareTo(temp.getNext().getValue()) < 0) {
-                // Swap nodes
-                T tempValue = temp.getValue();
-                temp.setValue(temp.getNext().getValue());
-                temp.getNext().setValue(tempValue);
+            SNode<T> temp = head;
+            while (temp != current && ((Comparable<T>) current.getValue()).compareTo(temp.getValue()) > 0) {
                 temp = temp.getNext();
+            }
+            if (temp != current) {
+                T tempValue = current.getValue();
+                current.setValue(temp.getValue());
+                temp.setValue(tempValue);
             }
             current = current.getNext();
         }

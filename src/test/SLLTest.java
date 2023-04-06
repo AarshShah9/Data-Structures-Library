@@ -230,7 +230,7 @@ public class SLLTest {
 
         SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
         list.insert(new SNode<Integer>(3), 1);
-        list.insert(new SNode<Integer>(4), 2);
+        list.insert(new SNode<Integer>(4), 0);
         list.insert(new SNode<Integer>(2), 1);
 
         list.sort();
