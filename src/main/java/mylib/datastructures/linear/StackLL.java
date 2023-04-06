@@ -21,19 +21,16 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
 
     public void push(SNode<T> node) {
         super.insertHead(node);
-        SNode<T> current = head;
-        while (current.getNext() != null) {
-            current = current.getNext();
-        }
-        top = current;
+        top = head;
     }
 
-    public T pop() {
+    public SNode<T> pop() {
         if (empty()) {
-            throw new RuntimeException("Stack is empty");
+            return null;
         }
-        T data = top.getValue();
-        deleteTail();
+        SNode<T> data = top;
+        deleteHead();
+        top = head;
         return data;
     }
 
@@ -41,11 +38,11 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
         return getSize();
     }
 
-    public T peek() {
+    public SNode<T> peek() {
         if (empty()) {
-            throw new RuntimeException("Stack is empty");
+            return null;
         }
-        return top.getValue();
+        return top;
     }
 
     public int search(T data) {
@@ -61,21 +58,16 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
         return -1;
     }
 
-    @Override
     public SNode<T> search(SNode<T> node) {
-        SNode<T> current = head;
-        while (current != null) {
-            if (current.getValue() == node.getValue()) {
-                return current;
-            }
-            current = current.getNext();
-        }
-        return null;
+        return super.search(node);
+    }
+
+    public SNode<T> getTop() {
+        return top;
     }
 
     @Override
     public void print() {
-
     }
 
     @Override
@@ -83,7 +75,11 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
     }
 
     @Override
-    public void insertHead(SNode<T> node) {
+    public void insertTail(SNode<T> node) {
+    }
+
+    @Override
+    public void sort() {
     }
 
     @Override
@@ -91,7 +87,7 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
     }
 
     @Override
-    public void deleteHead() {
+    public void deleteTail() {
     }
 
     @Override
