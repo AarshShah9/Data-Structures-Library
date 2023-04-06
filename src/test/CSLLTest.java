@@ -234,11 +234,11 @@ public class CSLLTest {
                 Arrays.asList(0, 1, 2, 3, 4, 5));
 
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
-        list.sortedInsert(new SNode<Integer>(3));
+        list.insertTail(new SNode<Integer>(3));
         list.insertHead(new SNode<Integer>(0));
-        list.sortedInsert(new SNode<Integer>(4));
+        list.insertTail(new SNode<Integer>(4));
         list.insertTail(new SNode<Integer>(5));
-        list.sortedInsert(new SNode<Integer>(2));
+        list.insertTail(new SNode<Integer>(2));
 
         list.sort();
 

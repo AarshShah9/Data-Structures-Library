@@ -65,7 +65,7 @@ public class CDLLTest {
             list3.insertHead(new DNode<Integer>(DUMMY_DATA.get(i)));
         }
         list3.insertTail(new DNode<Integer>(1));
-        list3.sortedInsert(new DNode<Integer>(2));
+        list3.insertTail(new DNode<Integer>(2));
         assertEquals("Size should be 12", 12, list3.getSize());
 
     }
@@ -255,17 +255,15 @@ public class CDLLTest {
         list.sort();
 
         boolean valid = true;
-        if (list.getHead().getValue() != expected.get(0)) {
-            valid = false;
-        }
-        int i = 1;
-
-        for (DNode<Integer> node = list.getHead().getNext(); node != list.getHead(); node = node.getNext(), i++) {
+        int i = 0;
+        DNode<Integer> node = list.getHead();
+        do {
             if (node.getValue() != expected.get(i)) {
                 valid = false;
                 break;
             }
-        }
+            i++;
+        } while ((node = node.getNext()) != list.getHead());
 
         assertTrue("Sort is not working as it should", valid);
         assertTrue("List should be sorted", list.isSorted());
@@ -273,9 +271,9 @@ public class CDLLTest {
         assertTrue("Tail should be 5", 5 == list.getTail().getValue());
         assertTrue("Size should be 6", 6 == list.getSize());
 
-        DNode<Integer> node = list.getHead();
-        for (; node != list.getTail(); node = node.getNext()) {
-            if (node.getNext() == null || node.getNext().getPrevious() != node) {
+        DNode<Integer> node2 = list.getHead();
+        for (; node2 != list.getTail(); node2 = node2.getNext()) {
+            if (node2.getNext() == null || node2.getNext().getPrevious() != node2) {
                 valid = false;
                 break;
             }

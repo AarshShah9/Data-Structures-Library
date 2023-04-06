@@ -5,6 +5,7 @@ import main.java.mylib.datastructures.nodes.DNode;
 public class DLL<T extends Comparable<T>> {
     protected DNode<T> head;
     protected DNode<T> tail;
+    protected DNode<T> sortedHead;
     protected int size;
     protected boolean sorted;
 
@@ -121,20 +122,41 @@ public class DLL<T extends Comparable<T>> {
 
     }
 
+    public void sort() {
+        if (sorted || size < 2) {
+            sorted = true;
+            return;
+        }
+        DNode<T> current = head;
+        while (current != null) {
+            DNode<T> key = current;
+            T value = key.getValue();
+            DNode<T> prev = key.getPrevious();
+            while (prev != null && prev.getValue().compareTo(value) > 0) {
+                key.setValue(prev.getValue());
+                key = prev;
+                prev = key.getPrevious();
+            }
+            key.setValue(value);
+            current = current.getNext();
+        }
+        sorted = true;
+    }
+
     public DNode<T> search(DNode<T> node) {
         if (head == null) {
             return null;
         }
-        if (head == node) {
+        if (head.getValue().compareTo(node.getValue()) == 0) {
             return head;
         }
-        if (tail == node) {
+        if (tail.getValue().compareTo(node.getValue()) == 0) {
             return tail;
         }
 
         DNode<T> current = head.getNext();
         while (current != null) {
-            if (current == node) {
+            if (current.getValue().compareTo(node.getValue()) == 0) {
                 return current;
             }
             current = current.getNext();
@@ -181,27 +203,6 @@ public class DLL<T extends Comparable<T>> {
             }
             current = current.getNext();
         }
-    }
-
-    public void sort() {
-        if (sorted || size < 2) {
-            sorted = true;
-            return;
-        }
-        DNode<T> current = head;
-        while (current != null) {
-            DNode<T> key = current;
-            T value = key.getValue();
-            DNode<T> prev = key.getPrevious();
-            while (prev != null && prev.getValue().compareTo(value) > 0) {
-                key.setValue(prev.getValue());
-                key = prev;
-                prev = key.getPrevious();
-            }
-            key.setValue(value);
-            current = current.getNext();
-        }
-        sorted = true;
     }
 
     public void clear() {

@@ -183,6 +183,7 @@ public class SLLTest {
         list.insert(nodeToCheck, 2);
 
         SNode<Integer> node = list.search(nodeToCheck);
+        list.sort();
 
         assertNotNull(node);
         assertEquals("Node data should be 4", 4, (int) node.getValue());

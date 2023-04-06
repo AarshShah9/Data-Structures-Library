@@ -72,61 +72,6 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
     }
 
     @Override
-    public void sortedInsert(SNode<T> node) {
-        if (!sorted) {
-            sort();
-        }
-        if (head == null) {
-            head = node;
-            tail = head;
-        } else if (((Comparable<T>) head.getValue()).compareTo(node.getValue()) > 0) {
-            node.setNext(head);
-            head = node;
-        } else if (((Comparable<T>) tail.getValue()).compareTo(node.getValue()) < 0) {
-            tail.setNext(node);
-            tail = node;
-            tail.setNext(head);
-        } else {
-            SNode<T> current = head;
-            while (current.getNext() != null
-                    && ((Comparable<T>) current.getNext().getValue()).compareTo(node.getValue()) < 0) {
-                current = current.getNext();
-            }
-            node.setNext(current.getNext());
-            current.setNext(node);
-        }
-        size++;
-        sorted = true;
-    }
-
-    @Override
-    public void sort() {
-        if (head == null || head.getNext() == null) {
-            sorted = true;
-            return; // List is already sorted
-        } else {
-            sortedHead = null;
-            SNode<T> current = head;
-            while (current != null) {
-
-                SNode<T> next = current.getNext();
-                sortedInsertHelper(current);
-                current = next;
-            }
-        }
-        head = sortedHead;
-        sortedHead = null;
-        SNode<T> current = head;
-        while (current.getNext() != null) {
-            current = current.getNext();
-        }
-        tail = current;
-        tail.setNext(head);
-        sorted = true; // Update sort status
-
-    }
-
-    @Override
     public void deleteHead() {
         if (head != null) {
             tail.setNext(head.getNext());
@@ -174,15 +119,15 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
             return null;
         }
 
-        if (head == node) {
+        if (head.getValue().compareTo(node.getValue()) == 0) {
             return head;
-        } else if (tail == node) {
+        } else if (tail.getValue().compareTo(node.getValue()) == 0) {
             return tail;
         }
         SNode<T> current = head.getNext();
         // TODO is this fine to go to tail?
         while (current != tail) {
-            if (current == node) {
+            if (current.getValue().compareTo(node.getValue()) == 0) {
                 return current;
             }
             current = current.getNext();
