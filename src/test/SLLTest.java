@@ -151,12 +151,14 @@ public class SLLTest {
     @Test
     public void testSortedInsert() {
         ArrayList<Integer> expected = new ArrayList<Integer>(
-                Arrays.asList(1, 2, 3, 4));
+                Arrays.asList(0, 1, 2, 3, 4, 5));
 
         SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
         list.sortedInsert(new SNode<Integer>(3));
         list.sortedInsert(new SNode<Integer>(4));
         list.sortedInsert(new SNode<Integer>(2));
+        list.sortedInsert(new SNode<Integer>(0));
+        list.sortedInsert(new SNode<Integer>(5));
 
         boolean valid = true;
         int i = 0;
@@ -167,9 +169,9 @@ public class SLLTest {
             }
         }
         assertTrue("Sorted insert is not working as it should", valid);
-        assertTrue("The head should be 1", list.getHead().getValue() == 1);
-        assertTrue("The tail should be 4", list.getTail().getValue() == 4);
-        assertTrue("The size should be 4", list.getSize() == 4);
+        assertEquals("The head should be 0", 0, (int) list.getHead().getValue());
+        assertEquals("The tail should be 5", 5, (int) list.getTail().getValue());
+        assertEquals("The size should be 6", 6, list.getSize());
         assertTrue("The list should be sorted", list.isSorted());
     }
 
@@ -233,12 +235,14 @@ public class SLLTest {
     @Test
     public void testSort() {
         ArrayList<Integer> expected = new ArrayList<Integer>(
-                Arrays.asList(1, 2, 3, 4));
+                Arrays.asList(0, 1, 2, 3, 4, 5));
 
         SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
         list.insert(new SNode<Integer>(3), 1);
         list.insert(new SNode<Integer>(4), 0);
         list.insert(new SNode<Integer>(2), 1);
+        list.insertHead(new SNode<Integer>(0));
+        list.insertTail(new SNode<Integer>(5));
 
         list.sort();
 
@@ -253,9 +257,9 @@ public class SLLTest {
 
         assertTrue("Sort is not working as it should", valid);
         assertTrue("List should be sorted", list.isSorted());
-        assertTrue("The head should be 1", list.getHead().getValue() == 1);
-        assertTrue("The tail should be 4", list.getTail().getValue() == 4);
-        assertEquals("The size should be 4", 4, list.getSize());
+        assertTrue("The head should be 0", list.getHead().getValue() == 0);
+        assertTrue("The tail should be 5", list.getTail().getValue() == 5);
+        assertEquals("The size should be 6", 6, list.getSize());
     }
 
     @Test

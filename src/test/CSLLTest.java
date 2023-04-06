@@ -193,15 +193,19 @@ public class CSLLTest {
         list.deleteHead();
 
         assertEquals("Head should be 1", 1, (int) list.getHead().getValue());
+        assertEquals("Tail should be 1", 1, (int) list.getTail().getValue());
     }
 
     @Test
     public void testDeleteTail() {
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         list.insertHead(new SNode<Integer>(2));
+        list.insertHead(new SNode<Integer>(3));
+        list.insertTail(new SNode<Integer>(4));
 
         list.deleteTail();
 
+        assertEquals("Head should be 3", 3, (int) list.getHead().getValue());
         assertEquals("Tail should be 1", 1, (int) list.getTail().getValue());
     }
 

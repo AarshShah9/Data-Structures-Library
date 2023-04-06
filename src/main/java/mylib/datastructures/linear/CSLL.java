@@ -26,11 +26,7 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
             head.setNext(head);
             tail = head;
         } else {
-            SNode<T> current = head;
-            while (current.getNext() != head) {
-                current = current.getNext();
-            }
-            current.setNext(node);
+            tail.setNext(node);
             node.setNext(head);
             head = node;
         }
@@ -135,7 +131,9 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
         if (head != null) {
             tail.setNext(head.getNext());
             head = head.getNext();
+            tail.setNext(head);
             size--;
+
         }
     }
 
@@ -147,6 +145,7 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
                 current = current.getNext();
             }
             current.setNext(head);
+            tail = current;
             size--;
         }
     }
@@ -156,6 +155,8 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
         if (head != null) {
             if (head == node) {
                 deleteHead();
+            } else if (tail == node) {
+                deleteTail();
             } else {
                 SNode<T> current = head;
                 while (current.getNext() != node) {

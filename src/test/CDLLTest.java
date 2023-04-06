@@ -271,7 +271,7 @@ public class CDLLTest {
         assertTrue("List should be sorted", list.isSorted());
         assertTrue("Head should be 0", 0 == list.getHead().getValue());
         assertTrue("Tail should be 5", 5 == list.getTail().getValue());
-        assertTrue("Size should be 5", 5 == list.getSize());
+        assertTrue("Size should be 6", 6 == list.getSize());
 
         DNode<Integer> node = list.getHead();
         for (; node != list.getTail(); node = node.getNext()) {
