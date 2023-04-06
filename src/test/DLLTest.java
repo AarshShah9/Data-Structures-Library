@@ -58,6 +58,14 @@ public class DLLTest {
 
         DLL<Integer> list2 = new DLL<Integer>(new DNode<Integer>(1));
         assertEquals("Size should be 1", 1, list2.getSize());
+
+        DLL<Integer> list3 = new DLL<Integer>();
+        for (int i = 0; i < DUMMY_DATA.size(); i++) {
+            list3.insertHead(new DNode<Integer>(DUMMY_DATA.get(i)));
+        }
+        list3.insertTail(new DNode<Integer>(1));
+        list3.sortedInsert(new DNode<Integer>(2));
+        assertEquals("Size should be 12", 12, list3.getSize());
     }
 
     @Test

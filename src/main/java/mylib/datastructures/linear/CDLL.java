@@ -25,6 +25,7 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
             head = node;
             head.setNext(head);
             head.setPrevious(head);
+            tail = head;
         } else {
             tail.setNext(node);
             node.setNext(head);
@@ -43,6 +44,7 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
             head = node;
             head.setNext(head);
             head.setPrevious(head);
+            tail = head;
         } else {
             tail.setNext(node);
             node.setNext(head);
@@ -63,6 +65,8 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
             head = node;
             head.setNext(head);
             head.setPrevious(head);
+            tail = head;
+            size++;
         } else if (head == tail) {
             if (head.getValue().compareTo(node.getValue()) > 0) {
                 node.setNext(head);
@@ -70,6 +74,7 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
                 head.setNext(node);
                 head.setPrevious(node);
                 head = node;
+                tail = head.getNext();
             } else {
                 node.setNext(head);
                 node.setPrevious(head);
@@ -77,6 +82,7 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
                 head.setPrevious(node);
                 tail = node;
             }
+            size++;
         } else {
             DNode<T> current = head;
             while (current.getNext() != head) {
@@ -97,12 +103,14 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
                 current.getPrevious().setNext(node);
                 current.setPrevious(node);
                 head = node;
+                tail = current;
             } else {
                 node.setNext(current.getNext());
                 node.setPrevious(current);
                 current.setNext(node);
                 tail = node;
             }
+            size++;
         }
     }
 
@@ -143,7 +151,20 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
         } else if (head == tail && head == node) {
             head = null;
             tail = null;
-        } else {
+            size--;
+        } else if (head == node) {
+            tail.setNext(head.getNext());
+            head.getNext().setPrevious(tail);
+            head = head.getNext();
+            size--;
+        } else if (tail == node) {
+            tail.getPrevious().setNext(head);
+            head.setPrevious(tail.getPrevious());
+            tail = tail.getPrevious();
+            size--;
+        }
+
+        else {
             DNode<T> current = head;
             while (current.getNext() != head) {
                 if (current == node) {
@@ -186,8 +207,30 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
         sorted = true;
     }
 
+    @Override
+    public DNode<T> search(DNode<T> node) {
+        if (head == null) {
+            return null;
+        }
+
+        if (head == node) {
+            return head;
+        } else if (tail == node) {
+            return tail;
+        }
+        DNode<T> current = head.getNext();
+        // TODO is this fine to go to tail?
+        while (current != tail) {
+            if (current == node) {
+                return current;
+            }
+            current = current.getNext();
+        }
+        return null;
+    }
+
     // Don't need to overide insert (as long as polymorphism works the way I think
     // it does)
-    // Don't need to overide search, print, clear, getHead, getTail, getSize,
+    // Don't need to overide print, clear, getHead, getTail, getSize,
     // isSorted, insert
 }

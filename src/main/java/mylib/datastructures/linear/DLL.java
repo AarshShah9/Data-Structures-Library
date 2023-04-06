@@ -120,9 +120,19 @@ public class DLL<T extends Comparable<T>> {
     }
 
     public DNode<T> search(DNode<T> node) {
-        DNode<T> current = head;
+        if (head == null) {
+            return null;
+        }
+        if (head == node) {
+            return head;
+        }
+        if (tail == node) {
+            return tail;
+        }
+
+        DNode<T> current = head.getNext();
         while (current != null) {
-            if (current.getValue().equals(node.getValue())) {
+            if (current == node) {
                 return current;
             }
             current = current.getNext();

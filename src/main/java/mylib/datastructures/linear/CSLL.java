@@ -167,5 +167,27 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
         sorted = true; // set sorted flag to true
     }
 
-    // We dont need to override: print, search, clear, getHead, getSize, isSorted
+    @Override
+    public SNode<T> search(SNode<T> node) {
+        if (head == null) {
+            return null;
+        }
+
+        if (head == node) {
+            return head;
+        } else if (tail == node) {
+            return tail;
+        }
+        SNode<T> current = head.getNext();
+        // TODO is this fine to go to tail?
+        while (current != tail) {
+            if (current == node) {
+                return current;
+            }
+            current = current.getNext();
+        }
+        return null;
+    }
+
+    // We dont need to override: print, clear, getHead, getSize, isSorted
 }
