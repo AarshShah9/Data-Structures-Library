@@ -67,6 +67,12 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
     }
 
     @Override
+    public void clear() {
+        super.clear();
+        top = null;
+    }
+
+    @Override
     public void print() {
     }
 
