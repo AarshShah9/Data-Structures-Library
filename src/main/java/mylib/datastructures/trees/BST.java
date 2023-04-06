@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.java.mylib.datastructures.linear.QueueLL;
 import main.java.mylib.datastructures.nodes.TNode;
+import main.java.mylib.datastructures.nodes.SNode;
 
 public class BST<T extends Comparable<T>> {
     private TNode<T> root;
@@ -152,22 +153,22 @@ public class BST<T extends Comparable<T>> {
         }
 
         QueueLL<TNode<T>> queue = new QueueLL<>();
-        queue.enqueue(root);
+        queue.enqueue(new SNode<TNode<T>>(root));
 
         int currentLevelCount = 1;
         int nextLevelCount = 0;
 
         while (!queue.empty()) {
-            TNode<T> node = queue.dequeue();
+            TNode<T> node = queue.dequeue().getValue();
             allData.add(node.getValue());
             currentLevelCount--;
 
             if (node.getLeft() != null) {
-                queue.enqueue(node.getLeft());
+                queue.enqueue(new SNode<TNode<T>>(node.getLeft()));
                 nextLevelCount++;
             }
             if (node.getRight() != null) {
-                queue.enqueue(node.getRight());
+                queue.enqueue(new SNode<TNode<T>>(node.getRight()));
                 nextLevelCount++;
             }
 
@@ -212,17 +213,17 @@ public class BST<T extends Comparable<T>> {
             return;
         }
         QueueLL<TNode<T>> queue = new QueueLL<>();
-        queue.enqueue(root);
+        queue.enqueue(new SNode<TNode<T>>(root));
 
         while (!queue.empty()) {
-            TNode<T> node = queue.dequeue();
+            TNode<T> node = queue.dequeue().getValue();
             node.setBalance(getHeight(node.getRight()) - getHeight(node.getLeft()));
 
             if (node.getLeft() != null) {
-                queue.enqueue(node.getLeft());
+                queue.enqueue(new SNode<TNode<T>>(node.getLeft()));
             }
             if (node.getRight() != null) {
-                queue.enqueue(node.getRight());
+                queue.enqueue(new SNode<TNode<T>>(node.getRight()));
             }
         }
 
