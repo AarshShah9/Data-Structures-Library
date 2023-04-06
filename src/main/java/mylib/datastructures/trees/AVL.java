@@ -36,9 +36,9 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
     }
 
     private void balanceTree(TNode<T> node) {
-        int balanceFactor = getBalanceFactor(node);
+        int balanceFactor = node.getBalance();
         if (balanceFactor > 1) {
-            if (getBalanceFactor(node.getLeft()) < 0) {
+            if (node.getLeft().getBalance() < 0) {
                 node.setLeft(rotateLeft(node.getLeft()));
             }
             node = rotateRight(node);
