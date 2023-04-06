@@ -188,7 +188,6 @@ public class DLL<T extends Comparable<T>> {
             sorted = true;
             return;
         }
-
         DNode<T> current = head;
         while (current != null) {
             DNode<T> key = current;

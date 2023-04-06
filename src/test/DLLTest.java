@@ -178,7 +178,7 @@ public class DLLTest {
 
         boolean valid2 = true;
         int i2 = 0;
-        for (DNode<Integer> node = list.getHead(); node != null; node = node.getNext(), i2++) {
+        for (DNode<Integer> node = list2.getHead(); node != null; node = node.getNext(), i2++) {
             if (node.getValue() != expected2.get(i2)) {
                 valid2 = false;
                 break;
@@ -253,13 +253,14 @@ public class DLLTest {
     @Test
     public void testSort() {
         ArrayList<Integer> expected = new ArrayList<Integer>(
-                Arrays.asList(1, 2, 3, 4));
+                Arrays.asList(0, 1, 2, 3, 4, 5));
 
         DLL<Integer> list = new DLL<Integer>(new DNode<Integer>(1));
         list.insert(new DNode<Integer>(3), 1);
         list.insert(new DNode<Integer>(4), 2);
+        list.insertTail(new DNode<Integer>(0));
         list.insert(new DNode<Integer>(2), 1);
-
+        list.insertHead(new DNode<Integer>(5));
         list.sort();
 
         boolean valid = true;
@@ -273,6 +274,9 @@ public class DLLTest {
 
         assertTrue("Sort is not working as it should", valid);
         assertTrue("List should be sorted", list.isSorted());
+        assertTrue("Head should be 0", 0 == list.getHead().getValue());
+        assertTrue("Tail should be 5", 5 == list.getTail().getValue());
+        assertTrue("Size should be 6", 6 == list.getSize());
     }
 
     @Test

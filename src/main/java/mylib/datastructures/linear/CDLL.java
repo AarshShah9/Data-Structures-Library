@@ -180,6 +180,7 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
 
     public void sort() {
         if (head == null || head == head.getPrevious()) {
+            sorted = true;
             // List is empty or has only one element, so it is already sorted
             return;
         }

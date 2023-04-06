@@ -138,9 +138,6 @@ public class BST<T extends Comparable<T>> {
 
     private TNode<T> findMinNode(TNode<T> node) {
         TNode<T> current = node;
-        while (current.getLeft() != null) {
-            current = current.getLeft();
-        }
         while (current.getRight() != null) {
             current = current.getRight();
         }
@@ -157,19 +154,38 @@ public class BST<T extends Comparable<T>> {
         QueueLL<TNode<T>> queue = new QueueLL<>();
         queue.enqueue(root);
 
+        int currentLevelCount = 1;
+        int nextLevelCount = 0;
+
         while (!queue.empty()) {
             TNode<T> node = queue.dequeue();
             allData.add(node.getValue());
+            currentLevelCount--;
 
             if (node.getLeft() != null) {
                 queue.enqueue(node.getLeft());
+                nextLevelCount++;
             }
             if (node.getRight() != null) {
                 queue.enqueue(node.getRight());
+                nextLevelCount++;
+            }
+
+            if (currentLevelCount == 0) {
+                printData(allData);
+                allData.clear();
+                currentLevelCount = nextLevelCount;
+                nextLevelCount = 0;
+                System.out.println();
             }
         }
+    }
 
-        printData(allData);
+    private void printData(ArrayList<T> allData) {
+        for (T data : allData) {
+            System.out.print(data + " ");
+        }
+        System.out.println();
     }
 
     public void printInOrder() {
@@ -189,13 +205,6 @@ public class BST<T extends Comparable<T>> {
         traverseInOrder(node.getLeft(), allData);
         allData.add(node.getValue());
         traverseInOrder(node.getRight(), allData);
-    }
-
-    private void printData(ArrayList<T> allData) {
-        for (T data : allData) {
-            System.out.print(data + " ");
-        }
-        System.out.println();
     }
 
     private void setBalanceFactorForTree() {
