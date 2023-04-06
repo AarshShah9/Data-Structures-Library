@@ -1,13 +1,13 @@
 package main.java.mylib.datastructures.linear;
 
-import main.java.mylib.datastructures.nodes.SingleNode;
+import main.java.mylib.datastructures.nodes.SNode;
 
-public class Queue<T> {
+public class QueueLL<T> {
     private int size;
-    private SingleNode<T> head;
-    private SingleNode<T> tail;
+    private SNode<T> head;
+    private SNode<T> tail;
 
-    public Queue() {
+    public QueueLL() {
         size = 0;
         head = null;
         tail = null;
@@ -18,7 +18,7 @@ public class Queue<T> {
     }
 
     public void enqueue(T data) {
-        SingleNode<T> newNode = new SingleNode<>(data);
+        SNode<T> newNode = new SNode<>(data);
         if (empty()) {
             head = newNode;
             tail = newNode;
@@ -47,7 +47,7 @@ public class Queue<T> {
     }
 
     public int search(T data) {
-        SingleNode<T> current = head;
+        SNode<T> current = head;
         int index = 0;
         while (current != null) {
             if (current.getValue() == data) {

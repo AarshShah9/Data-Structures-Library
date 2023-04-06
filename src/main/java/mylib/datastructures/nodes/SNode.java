@@ -1,10 +1,10 @@
 package main.java.mylib.datastructures.nodes;
 
-public class SingleNode<T> {
+public class SNode<T> {
     private T value;
-    private SingleNode<T> next;
+    private SNode<T> next;
 
-    public SingleNode(T value) {
+    public SNode(T value) {
         this.value = value;
         this.next = null;
     }
@@ -17,11 +17,11 @@ public class SingleNode<T> {
         this.value = value;
     }
 
-    public SingleNode<T> getNext() {
+    public SNode<T> getNext() {
         return next;
     }
 
-    public void setNext(SingleNode<T> next) {
+    public void setNext(SNode<T> next) {
         this.next = next;
     }
 }
