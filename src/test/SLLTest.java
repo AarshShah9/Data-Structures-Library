@@ -124,6 +124,9 @@ public class SLLTest {
         }
 
         assertTrue("Insert at position is not working as it should", valid);
+        assertTrue("The head should be 1", list.getHead().getValue() == 1);
+        assertTrue("The tail should be 3", list.getTail().getValue() == 3);
+        assertTrue("The size should be 4", list.getSize() == 4);
 
     }
 
@@ -164,6 +167,9 @@ public class SLLTest {
             }
         }
         assertTrue("Sorted insert is not working as it should", valid);
+        assertTrue("The head should be 1", list.getHead().getValue() == 1);
+        assertTrue("The tail should be 4", list.getTail().getValue() == 4);
+        assertTrue("The size should be 4", list.getSize() == 4);
     }
 
     @Test
@@ -246,6 +252,9 @@ public class SLLTest {
 
         assertTrue("Sort is not working as it should", valid);
         assertTrue("List should be sorted", list.isSorted());
+        assertTrue("The head should be 1", list.getHead().getValue() == 1);
+        assertTrue("The tail should be 4", list.getTail().getValue() == 4);
+        assertTrue("The size should be 4", list.getSize() == 4);
     }
 
     @Test
