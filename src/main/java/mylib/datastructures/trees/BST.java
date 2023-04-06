@@ -107,7 +107,7 @@ public class BST<T extends Comparable<T>> {
             }
         } else {
             // Case 3: Node has two children
-            TNode<T> successor = findMinNode(node.getRight());
+            TNode<T> successor = findMinNode(node.getLeft());
             node.setValue(successor.getValue());
             if (successor.getParent().getLeft() == successor) {
                 successor.getParent().setLeft(successor.getRight());
@@ -140,6 +140,9 @@ public class BST<T extends Comparable<T>> {
         TNode<T> current = node;
         while (current.getLeft() != null) {
             current = current.getLeft();
+        }
+        while (current.getRight() != null) {
+            current = current.getRight();
         }
         return current;
     }

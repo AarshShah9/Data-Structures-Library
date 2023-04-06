@@ -206,7 +206,7 @@ public class DLL<T extends Comparable<T>> {
         System.out.print("Sort Status: " + sorted);
         System.out.print("List Values: ");
         DNode<T> current = head;
-        while (current != null) {
+        while (current != tail) {
             System.out.print(current.getValue() + " ");
             current = current.getNext();
         }

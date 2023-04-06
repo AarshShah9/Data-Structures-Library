@@ -113,8 +113,8 @@ public class CSLLTest {
                 break;
             }
         }
-
         assertTrue("Insert at position is not working as it should", valid);
+        assertFalse("List should not be sorted", list.isSorted());
 
     }
 
@@ -159,7 +159,7 @@ public class CSLLTest {
     }
 
     @Test
-    public void testSearchWithValiSNode() {
+    public void testSearchWithValidSNode() {
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         SNode<Integer> nodeToCheck = new SNode<Integer>(4);
         list.insert(new SNode<Integer>(2), 1);
@@ -172,7 +172,7 @@ public class CSLLTest {
     }
 
     @Test
-    public void testSearchWithInvaliSNode() {
+    public void testSearchWithInvalidSNode() {
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
         SNode<Integer> nodeToCheck = new SNode<Integer>(4);
 

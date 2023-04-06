@@ -6,6 +6,7 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
 
     public CSLL() {
         head = null;
+        tail = null;
         size = 0;
         sorted = false;
     }
@@ -13,6 +14,7 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
     public CSLL(SNode<T> node) {
         head = node;
         head.setNext(head);
+        tail = head;
         size = 1;
         sorted = false;
     }
@@ -22,6 +24,7 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
         if (head == null) {
             head = node;
             head.setNext(head);
+            tail = head;
         } else {
             SNode<T> current = head;
             while (current.getNext() != head) {
@@ -40,13 +43,11 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
         if (head == null) {
             head = node;
             head.setNext(head);
+            tail = head;
         } else {
-            SNode<T> current = head;
-            while (current.getNext() != head) {
-                current = current.getNext();
-            }
-            current.setNext(node);
+            tail.setNext(node);
             node.setNext(head);
+            tail = node;
         }
         size++;
         sorted = false;
@@ -55,9 +56,12 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
 
     @Override
     public void insert(SNode<T> node, int position) {
+        if (position < 0 || position > size) {
+            throw new IndexOutOfBoundsException("Position is out of bounds");
+        }
         if (position == 0) {
             insertHead(node);
-        } else if (position == size) {
+        } else if (position == size - 1) {
             insertTail(node);
         } else {
             SNode<T> current = head;
@@ -67,6 +71,7 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
             node.setNext(current.getNext());
             current.setNext(node);
             size++;
+            sorted = false;
         }
     }
 

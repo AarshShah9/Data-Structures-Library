@@ -199,10 +199,11 @@ public class SLLTest {
     public void testDeleteTail() {
         SLL<Integer> list = new SLL<Integer>(new SNode<Integer>(1));
         list.insertHead(new SNode<Integer>(2));
+        list.insertHead(new SNode<Integer>(3));
+        list.insertHead(new SNode<Integer>(4));
 
         list.deleteTail();
-
-        assertEquals("Tail should be 2", 2, (int) list.getTail().getValue());
+        assertEquals("Tail should be 1", 1, (int) list.getTail().getValue());
     }
 
     @Test

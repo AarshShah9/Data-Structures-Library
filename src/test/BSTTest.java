@@ -175,6 +175,29 @@ public class BSTTest {
         assertEquals("The roots right child should become 7", 7, (int) bst.getRoot().getRight().getValue());
         assertEquals("The roots left child should become 2", 2, (int) bst.getRoot().getLeft().getValue());
 
+        bst.delete(7);
+        assertEquals("The roots left child should stay 2", 2, (int) bst.getRoot().getLeft().getValue());
+        assertNull("The roots right child's should be null", bst.getRoot().getRight());
+
+        bst.delete(4);
+        assertEquals("The root should become 2", 2, (int) bst.getRoot().getValue());
+
+        BST<Integer> bst2 = new BST<>();
+
+        bst2.insert(13);
+        bst2.insert(9);
+        bst2.insert(4);
+        bst2.insert(10);
+        bst2.insert(2);
+        bst2.insert(15);
+        bst2.insert(20);
+
+        bst2.delete(0);
+        assertEquals("The root should stay 13", 13, (int) bst2.getRoot().getValue());
+
+        bst2.delete(13);
+        assertEquals("The root should become 10", 10, (int) bst2.getRoot().getValue());
+
     }
 
     @Test

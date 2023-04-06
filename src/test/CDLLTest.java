@@ -275,8 +275,9 @@ public class CDLLTest {
         list.insertHead(new DNode<Integer>(3));
         list.insertTail(new DNode<Integer>(20));
 
-        for (DNode<Integer> node = list.getHead(); node != null; node = node.getNext()) {
-            if (node.getNext() != null && node.getNext().getPrevious() != node) {
+        DNode<Integer> node = list.getHead();
+        for (; node != list.getTail(); node = node.getNext()) {
+            if (node.getNext() == null || node.getNext().getPrevious() != node) {
                 valid = false;
                 break;
             }

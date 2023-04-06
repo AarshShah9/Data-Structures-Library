@@ -43,6 +43,9 @@ public class SLL<T extends Comparable<T>> {
     public void insertHead(SNode<T> node) {
         if (head == null) {
             head = node;
+            tail = head;
+            size++;
+
         } else {
             node.setNext(head);
             head = node;
@@ -55,6 +58,9 @@ public class SLL<T extends Comparable<T>> {
     public void insertTail(SNode<T> node) {
         if (head == null) {
             head = node;
+            tail = head;
+            size++;
+
         } else {
             tail.setNext(node);
             tail = node;
@@ -189,7 +195,7 @@ public class SLL<T extends Comparable<T>> {
         System.out.print("Sort Status: " + this.sorted);
         System.out.print("List Values: ");
         SNode<T> current = head;
-        while (current != null) {
+        while (current != tail) {
             System.out.print(current.getValue() + " ");
             current = current.getNext();
         }
