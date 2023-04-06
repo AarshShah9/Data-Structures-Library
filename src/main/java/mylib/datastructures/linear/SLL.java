@@ -6,6 +6,7 @@ public class SLL<T extends Comparable<T>> {
 
     protected SNode<T> head;
     protected SNode<T> tail;
+    protected SNode<T> sortedHead;
     protected int size;
     protected boolean sorted;
 
@@ -155,6 +156,20 @@ public class SLL<T extends Comparable<T>> {
         }
     }
 
+    private void sortedInsertHelper(SNode<T> node) {
+        if (sortedHead == null || sortedHead.getValue().compareTo(node.getValue()) > 0) {
+            node.setNext(sortedHead);
+            sortedHead = node;
+        } else {
+            SNode<T> current = sortedHead;
+            while (current.getNext() != null && current.getNext().getValue().compareTo(node.getValue()) < 0) {
+                current = current.getNext();
+            }
+            node.setNext(current.getNext());
+            current.setNext(node);
+        }
+    }
+
     public void sortedInsert(SNode<T> node) {
         if (!sorted) {
             sort();
@@ -177,53 +192,38 @@ public class SLL<T extends Comparable<T>> {
             node.setNext(current.getNext());
             current.setNext(node);
         }
+
         size++;
         sorted = true;
-    }
-    // https://www.geeksforgeeks.org/insertion-sort-for-singly-linked-list/
 
-    // public void sort() {
-    // if (head == null || head.getNext() == null) {
-    // sorted = true;
-    // return; // List is already sorted
-    // }
-    // SNode<T> current = head.getNext();
-    // while (current != null) {
-    // SNode<T> temp = current;
-    // while (temp != null
-    // && ((Comparable<T>) temp.getValue()).compareTo(temp.getNext().getValue()) <
-    // 0) {
-    // // Swap nodes
-    // T tempValue = temp.getValue();
-    // temp.setValue(temp.getNext().getValue());
-    // temp.getNext().setValue(tempValue);
-    // temp = temp.getNext();
-    // }
-    // current = current.getNext();
-    // }
-    // sorted = true; // Update sort status
-    // // }
+    }
 
     public void sort() {
         if (head == null || head.getNext() == null) {
             sorted = true;
             return; // List is already sorted
+        } else {
+            sortedHead = null;
+            SNode<T> current = head;
+            while (current != null) {
+
+                SNode<T> next = current.getNext();
+                sortedInsertHelper(current);
+                current = next;
+            }
         }
-        SNode<T> current = head.getNext();
-        while (current != null) {
-            SNode<T> temp = head;
-            while (temp != current && ((Comparable<T>) current.getValue()).compareTo(temp.getValue()) > 0) {
-                temp = temp.getNext();
-            }
-            if (temp != current) {
-                T tempValue = current.getValue();
-                current.setValue(temp.getValue());
-                temp.setValue(tempValue);
-            }
+        head = sortedHead;
+        sortedHead = null;
+        SNode<T> current = head;
+        while (current.getNext() != null) {
             current = current.getNext();
         }
+        tail = current;
         sorted = true; // Update sort status
+
     }
+
+    // _____________________________________________________________
 
     public void clear() {
         head = null;

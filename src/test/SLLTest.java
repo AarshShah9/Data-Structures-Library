@@ -170,6 +170,7 @@ public class SLLTest {
         assertTrue("The head should be 1", list.getHead().getValue() == 1);
         assertTrue("The tail should be 4", list.getTail().getValue() == 4);
         assertTrue("The size should be 4", list.getSize() == 4);
+        assertTrue("The list should be sorted", list.isSorted());
     }
 
     @Test
@@ -216,7 +217,7 @@ public class SLLTest {
         list.insertHead(new SNode<Integer>(4));
 
         list.deleteTail();
-        assertEquals("Tail should be 1", 1, (int) list.getTail().getValue());
+        assertEquals("Tail should be 2", 2, (int) list.getTail().getValue());
     }
 
     @Test
@@ -254,7 +255,7 @@ public class SLLTest {
         assertTrue("List should be sorted", list.isSorted());
         assertTrue("The head should be 1", list.getHead().getValue() == 1);
         assertTrue("The tail should be 4", list.getTail().getValue() == 4);
-        assertTrue("The size should be 4", list.getSize() == 4);
+        assertEquals("The size should be 4", 4, list.getSize());
     }
 
     @Test

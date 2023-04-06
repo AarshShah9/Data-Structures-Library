@@ -252,6 +252,20 @@ public class CDLLTest {
 
         assertTrue("Sort is not working as it should", valid);
         assertTrue("List should be sorted", list.isSorted());
+        assertTrue("Head should be 1", 1 == list.getHead().getValue());
+        assertTrue("Tail should be 4", 4 == list.getTail().getValue());
+        assertTrue("Size should be 4", 4 == list.getSize());
+
+        DNode<Integer> node = list.getHead();
+        for (; node != list.getTail(); node = node.getNext()) {
+            if (node.getNext() == null || node.getNext().getPrevious() != node) {
+                valid = false;
+                break;
+            }
+        }
+
+        assertTrue("Doubly linked list is not doubly linked", valid);
+        assertEquals("List should be circular", list.getHead(), list.getTail().getNext());
     }
 
     @Test

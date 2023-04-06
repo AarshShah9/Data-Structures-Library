@@ -273,6 +273,9 @@ public class DLLTest {
 
         assertTrue("Sort is not working as it should", valid);
         assertTrue("List should be sorted", list.isSorted());
+        assertTrue("Head should be 1", 1 == list.getHead().getValue());
+        assertTrue("Tail should be 4", 4 == list.getTail().getValue());
+        assertTrue("Size should be 4", 4 == list.getSize());
     }
 
     @Test
