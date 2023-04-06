@@ -163,6 +163,18 @@ public class StackLLTest {
     }
 
     @Test
+    public void testClear() {
+        StackLL<Integer> stack = new StackLL<Integer>();
+
+        for (int i = 0; i < DUMMY_DATA.size(); i++) {
+            stack.push(new SNode<Integer>(DUMMY_DATA.get(i)));
+        }
+        stack.clear();
+        assertEquals("Size should be 0", 0, stack.getSize());
+        assertNull("Top should be null", stack.getTop());
+    }
+
+    @Test
     public void testOverrides() {
         StackLL<Integer> stack = new StackLL<Integer>();
 
