@@ -2,45 +2,47 @@ package main.java.mylib.datastructures.linear;
 
 import main.java.mylib.datastructures.nodes.SNode;
 
-public class StackLL<T> {
-    private int size;
+public class StackLL<T extends Comparable<T>> extends SLL<T> {
     private SNode<T> top;
 
     public StackLL() {
-        size = 0;
+        super();
         top = null;
+    }
+
+    public StackLL(SNode<T> node) {
+        super(node);
+        top = head;
     }
 
     public boolean empty() {
         return size == 0;
     }
 
-    public void push(T data) {
-        SNode<T> newNode = new SNode<>(data);
-        newNode.setNext(top);
-        top = newNode;
-        size++;
+    public void push(SNode<T> node) {
+        super.insertHead(node);
+        top = head;
     }
 
-    public T pop() {
+    public SNode<T> pop() {
         if (empty()) {
-            throw new RuntimeException("Stack is empty");
+            return null;
         }
-        T data = top.getValue();
-        top = top.getNext();
-        size--;
+        SNode<T> data = top;
+        deleteHead();
+        top = head;
         return data;
     }
 
     public int size() {
-        return size;
+        return getSize();
     }
 
-    public T peek() {
+    public SNode<T> peek() {
         if (empty()) {
-            throw new RuntimeException("Stack is empty");
+            return null;
         }
-        return top.getValue();
+        return top;
     }
 
     public int search(T data) {
@@ -56,9 +58,46 @@ public class StackLL<T> {
         return -1;
     }
 
-    public void clear() {
-        // Check with Aarsh/prof about this
-        top = null;
-        size = 0;
+    public SNode<T> search(SNode<T> node) {
+        return super.search(node);
     }
+
+    public SNode<T> getTop() {
+        return top;
+    }
+
+    @Override
+    public void clear() {
+        super.clear();
+        top = null;
+    }
+
+    @Override
+    public void print() {
+    }
+
+    @Override
+    public void insert(SNode<T> node, int position) {
+    }
+
+    @Override
+    public void insertTail(SNode<T> node) {
+    }
+
+    @Override
+    public void sort() {
+    }
+
+    @Override
+    public void sortedInsert(SNode<T> node) {
+    }
+
+    @Override
+    public void deleteTail() {
+    }
+
+    @Override
+    public void delete(SNode<T> node) {
+    }
+
 }

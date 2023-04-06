@@ -1,6 +1,6 @@
 package main.java.mylib.datastructures.nodes;
 
-public class TNode<T> {
+public class TNode<T extends Comparable<T>> implements Comparable<TNode<T>> {
     private T value;
     private TNode<T> left;
     private TNode<T> right;
@@ -89,6 +89,11 @@ public class TNode<T> {
 
     public String toString() {
         return value.toString();
+    }
+
+    @Override
+    public int compareTo(TNode<T> o) {
+        return this.value.compareTo(o.getValue());
     }
 
 }

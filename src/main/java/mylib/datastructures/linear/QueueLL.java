@@ -2,48 +2,42 @@ package main.java.mylib.datastructures.linear;
 
 import main.java.mylib.datastructures.nodes.SNode;
 
-public class QueueLL<T> {
-    private int size;
-    private SNode<T> head;
-    private SNode<T> tail;
+public class QueueLL<T extends Comparable<T>> extends SLL<T> {
 
     public QueueLL() {
-        size = 0;
-        head = null;
+        super();
         tail = null;
+    }
+
+    public QueueLL(SNode<T> node) {
+        super(node);
     }
 
     public boolean empty() {
         return size == 0;
     }
 
-    public void enqueue(T data) {
-        SNode<T> newNode = new SNode<>(data);
-        if (empty()) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            tail.setNext(newNode);
-            tail = newNode;
-        }
-        size++;
+    public void enqueue(SNode<T> node) {
+        super.insertTail(node);
     }
 
-    public T dequeue() {
+    public SNode<T> dequeue() {
         if (empty()) {
-            throw new RuntimeException("Queue is empty");
+            return null;
         }
-        T data = head.getValue();
-        head = head.getNext();
-        size--;
+        SNode<T> data = head;
+        super.deleteHead();
+        if (head == null) {
+            tail = null;
+        }
         return data;
     }
 
-    public T peek() {
+    public SNode<T> peek() {
         if (empty()) {
-            throw new RuntimeException("Queue is empty");
+            return null;
         }
-        return head.getValue();
+        return head;
     }
 
     public int search(T data) {
@@ -59,13 +53,38 @@ public class QueueLL<T> {
         return -1;
     }
 
+    public int size() {
+        return super.getSize();
+    }
+
+    @Override
     public void clear() {
         head = null;
         tail = null;
         size = 0;
     }
 
-    public int size() {
-        return size;
+    @Override
+    public void insertHead(SNode<T> node) {
+    }
+
+    @Override
+    public void deleteTail() {
+    }
+
+    @Override
+    public void insert(SNode<T> node, int position) {
+    }
+
+    @Override
+    public void delete(SNode<T> node) {
+    }
+
+    @Override
+    public void sort() {
+    }
+
+    @Override
+    public void sortedInsert(SNode<T> node) {
     }
 }
