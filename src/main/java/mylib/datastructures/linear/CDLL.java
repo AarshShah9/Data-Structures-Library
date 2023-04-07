@@ -120,6 +120,60 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
         }
     }
 
+    protected void sortedInsertHelper(DNode<T> node) {
+        DNode<T> current;
+
+        if (sortedHead == null) {
+            sortedHead = node;
+        } else if (sortedHead.getValue().compareTo(node.getValue()) >= 0) {
+            node.setNext(sortedHead);
+            node.getNext().setPrevious(node);
+            sortedHead = node;
+        } else {
+            current = sortedHead;
+
+            // find the node after which the new node is to be inserted
+            while (current.getNext() != null && current.getNext().getValue().compareTo(node.getValue()) < 0) {
+                current = current.getNext();
+            }
+
+            node.setNext(current.getNext());
+
+            if (current.getNext() != null) {
+                node.getNext().setPrevious(node);
+            }
+
+            current.setNext(node);
+            node.setPrevious(current);
+        }
+    }
+
+    public void sort() {
+        sortedHead = null;
+        DNode<T> current = head;
+
+        do {
+            DNode<T> next = current.getNext();
+
+            current.setNext(null);
+            current.setPrevious(null);
+            sortedInsertHelper(current);
+            current = next;
+        } while (current != head);
+
+        head = sortedHead;
+        sortedHead = null;
+
+        // find tail
+        current = head;
+        while (current.getNext() != null) {
+            current = current.getNext();
+        }
+        tail = current;
+        tail.setNext(head);
+        sorted = true;
+    }
+
     @Override
     public DNode<T> search(DNode<T> node) {
         if (head == null) {

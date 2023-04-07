@@ -263,7 +263,8 @@ public class CDLLTest {
                 break;
             }
             i++;
-        } while ((node = node.getNext()) != list.getHead());
+            node = node.getNext();
+        } while (node != list.getHead() && i < expected.size());
 
         assertTrue("Sort is not working as it should", valid);
         assertTrue("List should be sorted", list.isSorted());
