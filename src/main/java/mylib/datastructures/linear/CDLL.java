@@ -120,6 +120,36 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
         }
     }
 
+    @Override
+    public void sortedInsert(DNode<T> node) {
+        if (!sorted) {
+            sort();
+        }
+
+        if (head == null || head.getValue().compareTo(node.getValue()) >= 0) {
+            insertHead(node);
+            sorted = true;
+        } else if (tail.getValue().compareTo(node.getValue()) <= 0) {
+            insertTail(node);
+            sorted = true;
+        } else {
+            DNode<T> current = head;
+            while (current != tail) {
+                if (current.getValue().compareTo(node.getValue()) <= 0
+                        && current.getNext().getValue().compareTo(node.getValue()) >= 0) {
+                    node.setNext(current.getNext());
+                    node.setPrevious(current);
+                    current.setNext(node);
+                    node.getNext().setPrevious(node);
+                    size++;
+                    sorted = true;
+                    return;
+                }
+                current = current.getNext();
+            }
+        }
+    }
+
     protected void sortedInsertHelper(DNode<T> node) {
         DNode<T> current;
 

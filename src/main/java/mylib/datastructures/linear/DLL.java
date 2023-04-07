@@ -119,6 +119,7 @@ public class DLL<T extends Comparable<T>> {
                 insertTail(node);
             }
         }
+        sorted = true;
 
     }
 
