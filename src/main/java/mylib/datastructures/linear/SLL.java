@@ -91,21 +91,20 @@ public class SLL<T extends Comparable<T>> {
         }
     }
 
-    // TODO SHOULD THIS CHECK FOR REFERENCES OR VALUES?
     public SNode<T> search(SNode<T> node) {
         if (head == null) {
             return null;
         }
-        if (head == node) {
+        if (head.getValue().compareTo(node.getValue()) == 0) {
             return head;
         }
-        if (tail == node) {
+        if (tail.getValue().compareTo(node.getValue()) == 0) {
             return tail;
         }
 
         SNode<T> current = head;
         while (current != null) {
-            if (current == node) {
+            if (current.getValue().compareTo(node.getValue()) == 0) {
                 return current;
             }
             current = current.getNext();

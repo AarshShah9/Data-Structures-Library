@@ -204,6 +204,17 @@ public class DLLTest {
 
         assertNotNull(node);
         assertEquals("Node data should be 4", 4, (int) node.getValue());
+
+        DLL<Integer> list2 = new DLL<Integer>(new DNode<Integer>(1));
+        DNode<Integer> nodeToCheck2 = new DNode<Integer>(4);
+        list2.insert(new DNode<Integer>(2), 1);
+        list2.insert(nodeToCheck2, 2);
+
+        list2.sort();
+        DNode<Integer> node2 = list2.search(nodeToCheck2);
+
+        assertNotNull(node2);
+        assertEquals("Node data should be 4 - doesn't work after sort()", 4, (int) node2.getValue());
     }
 
     @Test
