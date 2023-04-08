@@ -148,7 +148,7 @@ public class BST<T extends Comparable<T>> {
     public void printBF() {
         ArrayList<T> allData = new ArrayList<>();
         if (root == null) {
-            System.out.println("Tree is empty.");
+            System.out.print("Tree is empty.\n");
             return;
         }
 
@@ -177,7 +177,7 @@ public class BST<T extends Comparable<T>> {
                 allData.clear();
                 currentLevelCount = nextLevelCount;
                 nextLevelCount = 0;
-                System.out.println();
+                System.out.print("\n");
             }
         }
     }
@@ -186,13 +186,13 @@ public class BST<T extends Comparable<T>> {
         for (T data : allData) {
             System.out.print(data + " ");
         }
-        System.out.println();
+        System.out.print("\n");
     }
 
     public void printInOrder() {
         ArrayList<T> allData = new ArrayList<>();
         if (root == null) {
-            System.out.println("Tree is empty.");
+            System.out.print("Tree is empty.\n");
             return;
         }
         traverseInOrder(root, allData);
