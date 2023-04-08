@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.java.mylib.datastructures.linear.QueueLL;
 import main.java.mylib.datastructures.nodes.TNode;
+import main.java.mylib.datastructures.nodes.SNode;
 
 public class BST<T extends Comparable<T>> {
     private TNode<T> root;
@@ -147,27 +148,27 @@ public class BST<T extends Comparable<T>> {
     public void printBF() {
         ArrayList<T> allData = new ArrayList<>();
         if (root == null) {
-            System.out.println("Tree is empty.");
+            System.out.print("Tree is empty.\n");
             return;
         }
 
         QueueLL<TNode<T>> queue = new QueueLL<>();
-        queue.enqueue(root);
+        queue.enqueue(new SNode<TNode<T>>(root));
 
         int currentLevelCount = 1;
         int nextLevelCount = 0;
 
         while (!queue.empty()) {
-            TNode<T> node = queue.dequeue();
+            TNode<T> node = queue.dequeue().getValue();
             allData.add(node.getValue());
             currentLevelCount--;
 
             if (node.getLeft() != null) {
-                queue.enqueue(node.getLeft());
+                queue.enqueue(new SNode<TNode<T>>(node.getLeft()));
                 nextLevelCount++;
             }
             if (node.getRight() != null) {
-                queue.enqueue(node.getRight());
+                queue.enqueue(new SNode<TNode<T>>(node.getRight()));
                 nextLevelCount++;
             }
 
@@ -176,7 +177,7 @@ public class BST<T extends Comparable<T>> {
                 allData.clear();
                 currentLevelCount = nextLevelCount;
                 nextLevelCount = 0;
-                System.out.println();
+                System.out.print("\n");
             }
         }
     }
@@ -185,13 +186,13 @@ public class BST<T extends Comparable<T>> {
         for (T data : allData) {
             System.out.print(data + " ");
         }
-        System.out.println();
+        System.out.print("\n");
     }
 
     public void printInOrder() {
         ArrayList<T> allData = new ArrayList<>();
         if (root == null) {
-            System.out.println("Tree is empty.");
+            System.out.print("Tree is empty.\n");
             return;
         }
         traverseInOrder(root, allData);
@@ -212,17 +213,17 @@ public class BST<T extends Comparable<T>> {
             return;
         }
         QueueLL<TNode<T>> queue = new QueueLL<>();
-        queue.enqueue(root);
+        queue.enqueue(new SNode<TNode<T>>(root));
 
         while (!queue.empty()) {
-            TNode<T> node = queue.dequeue();
+            TNode<T> node = queue.dequeue().getValue();
             node.setBalance(getHeight(node.getRight()) - getHeight(node.getLeft()));
 
             if (node.getLeft() != null) {
-                queue.enqueue(node.getLeft());
+                queue.enqueue(new SNode<TNode<T>>(node.getLeft()));
             }
             if (node.getRight() != null) {
-                queue.enqueue(node.getRight());
+                queue.enqueue(new SNode<TNode<T>>(node.getRight()));
             }
         }
 
