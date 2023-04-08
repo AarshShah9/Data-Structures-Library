@@ -3,22 +3,19 @@ package main.java.mylib.datastructures.trees;
 import main.java.mylib.datastructures.nodes.TNode;
 
 public class AVL<T extends Comparable<T>> extends BST<T> {
-    private TNode<T> root;
+    private TNode<T> root = super.getRoot();
 
     public AVL() {
-        root = null;
+        super();
     }
 
     public AVL(T val) {
-        root = new TNode<T>();
-        root.setValue(val);
+        super(val);
     }
 
     public AVL(TNode<T> node) {
-        this.root = node;
-        if (node != null) {
-            balanceTree(node);
-        }
+        super(node);
+        root = balanceTree(root);
     }
 
     private int getHeight(TNode<T> node) {
@@ -32,79 +29,127 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
         if (node == null) {
             return 0;
         }
-        return getHeight(node.getLeft()) - getHeight(node.getRight());
+        return (getHeight(node.getRight()) - getHeight(node.getLeft()));
     }
 
-    private void balanceTree(TNode<T> node) {
+    private TNode<T> balanceTree(TNode<T> node) {
         int balanceFactor = node.getBalance();
-        if (balanceFactor > 1) {
-            if (node.getLeft().getBalance() < 0) {
+
+        // Left heavy
+        if (balanceFactor < -1) {
+            // right rotation
+            if (getBalanceFactor(node.getLeft()) <= 0) {
+                node = rotateRight(node);
+            } else {
+                // left right rotation
                 node.setLeft(rotateLeft(node.getLeft()));
+                node = rotateRight(node);
             }
-            node = rotateRight(node);
-        } else if (balanceFactor < -1) {
-            if (getBalanceFactor(node.getRight()) > 0) {
-                node.setRight(rotateRight(node.getRight()));
-            }
-            node = rotateLeft(node);
         }
+        if (balanceFactor > 1) {
+            // left rotation
+            if (getBalanceFactor(node.getRight()) >= 0) {
+                node = rotateLeft(node);
+            } else {
+                // right left rotation
+                node.setRight(rotateRight(node.getRight()));
+                node = rotateLeft(node);
+            }
+        }
+
         if (node.getLeft() != null) {
-            balanceTree(node.getLeft());
+            node.setLeft(balanceTree(node.getLeft()));
         }
         if (node.getRight() != null) {
-            balanceTree(node.getRight());
+            node.setRight(balanceTree(node.getRight()));
         }
+
+        return node;
     }
 
     private TNode<T> rotateRight(TNode<T> node) {
-        TNode<T> newRoot = node.getLeft();
-        node.setLeft(newRoot.getRight());
-        newRoot.setRight(node);
-        return newRoot;
+        TNode<T> leftChild = node.getLeft();
+
+        leftChild.setParent(node.getParent());
+
+        node.setLeft(leftChild.getRight());
+        leftChild.setRight(node);
+
+        node.setParent(leftChild);
+
+        node.setBalance(getBalanceFactor(node));
+        leftChild.setBalance(getBalanceFactor(leftChild));
+
+        return leftChild;
     }
 
     private TNode<T> rotateLeft(TNode<T> node) {
-        TNode<T> newRoot = node.getRight();
-        node.setRight(newRoot.getLeft());
-        newRoot.setLeft(node);
-        return newRoot;
+        TNode<T> rightChild = node.getRight();
+
+        rightChild.setParent(node.getParent());
+
+        node.setRight(rightChild.getLeft());
+        rightChild.setLeft(node);
+
+        node.setParent(rightChild);
+
+        node.setBalance(getBalanceFactor(node));
+        rightChild.setBalance(getBalanceFactor(rightChild));
+
+        return rightChild;
     }
 
     public TNode<T> getRoot() {
-        return root;
+        return this.root;
     }
 
+    @Override
     public void setRoot(TNode<T> root) {
         this.root = root;
-        if (root != null) {
-            balanceTree(root);
+        if (this.root != null) {
+            this.root = balanceTree(this.root);
         }
     }
 
+    @Override
     public void insert(T val) {
+        super.setRoot(this.root);
         super.insert(val);
-        balanceTree(root);
+        this.root = super.getRoot();
+        this.root = balanceTree(root);
     }
 
+    @Override
     public void insert(TNode<T> node) {
+        super.setRoot(this.root);
         super.insert(node);
-        balanceTree(root);
+        this.root = super.getRoot();
+        this.root = balanceTree(root);
     }
 
+    @Override
     public void delete(T val) {
+        super.setRoot(this.root);
         super.delete(val);
-        balanceTree(root);
+        this.root = super.getRoot();
+        this.root = balanceTree(root);
     }
 
+    @Override
     public TNode<T> search(T val) {
+        super.setRoot(this.root);
         return super.search(val);
     }
 
+    @Override
     public void printInOrder() {
+        super.setRoot(this.root);
         super.printInOrder();
     }
 
+    @Override
     public void printBF() {
+        super.setRoot(this.root);
         super.printBF();
     }
 }
