@@ -2,8 +2,11 @@ package test;
 
 import java.util.ArrayList;
 
+import org.junit.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import main.java.mylib.datastructures.nodes.TNode;
 import main.java.mylib.datastructures.trees.BST;
@@ -223,8 +226,21 @@ public class BSTTest {
         assertNull("The search should return null", bst.search(6));
     }
 
+    private final ByteArrayOutputStream outputCaptor = new ByteArrayOutputStream();
+    private final PrintStream standardOut = System.out;
+
+    @Before
+    public void setUp() {
+        System.setOut(new PrintStream(outputCaptor));
+    }
+
+    @After
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+
     @Test
-    public void testPrints() {
+    public void testPrintInOrder() {
         BST<Integer> bst = new BST<>();
 
         bst.insert(5);
@@ -233,10 +249,37 @@ public class BSTTest {
         bst.insert(2);
         bst.insert(4);
 
-        System.out.println("Test print statements manually");
         bst.printInOrder();
-        bst.printBF();
+        assertEquals("The in order print should be 2 3 4 5 7 ", "2 3 4 5 7 \n", outputCaptor.toString());
+    }
 
+    @Test
+    public void testPrintBF() {
+        BST<Integer> bst = new BST<>();
+
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        bst.insert(2);
+        bst.insert(4);
+
+        bst.printBF();
+        assertEquals("The function should print:\n5 \n\n3 7 \n\n 2 4 ", "5 \n\n3 7 \n\n2 4 \n\n",
+                outputCaptor.toString());
+    }
+
+    @Test
+    public void testEmptyPrintInOrder() {
+        BST<Integer> bst = new BST<>();
+        bst.printInOrder();
+        assertEquals("The print should say Tree is empty.", "Tree is empty.\n", outputCaptor.toString());
+    }
+
+    @Test
+    public void testEmptyPrintBF() {
+        BST<Integer> bst = new BST<>();
+        bst.printBF();
+        assertEquals("The print should say Tree is empty.", "Tree is empty.\n", outputCaptor.toString());
     }
 
 }
