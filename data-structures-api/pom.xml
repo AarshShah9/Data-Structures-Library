@@ -28,13 +28,6 @@
           <includes>
             <include>**/*.java</include>
           </includes>
-          <!-- <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>mylib.datastructures.App</mainClass>
-            </manifest>
-          </archive> -->
         </configuration>
       </plugin>
     </plugins>
