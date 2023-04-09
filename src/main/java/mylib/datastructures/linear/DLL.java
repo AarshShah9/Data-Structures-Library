@@ -214,16 +214,15 @@ public class DLL<T extends Comparable<T>> {
     }
 
     public void print() {
-        System.out.print("Singly Linked List Information: ");
-        System.out.print("List Length: " + size);
-        System.out.print("Sort Status: " + sorted);
-        System.out.print("List Values: ");
+        System.out.print("Doubly Linked List Information: \n");
+        System.out.print("List Length: " + size + "\n");
+        System.out.print("Sort Status: " + sorted + "\n");
+        System.out.print("List Values: \n");
         DNode<T> current = head;
-        while (current != tail) {
+        do {
             System.out.print(current.getValue() + " ");
             current = current.getNext();
-        }
-        System.out.println();
+        } while (current != null);
     }
 
 }

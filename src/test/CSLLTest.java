@@ -3,6 +3,8 @@ package test;
 import main.java.mylib.datastructures.nodes.SNode;
 import main.java.mylib.datastructures.linear.CSLL;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.*;
@@ -278,6 +280,19 @@ public class CSLLTest {
         assertFalse("List should not be sorted", list.isSorted());
     }
 
+    private final ByteArrayOutputStream outputCaptor = new ByteArrayOutputStream();
+    private final PrintStream standardOut = System.out;
+
+    @Before
+    public void setUp() {
+        System.setOut(new PrintStream(outputCaptor));
+    }
+
+    @After
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+
     @Test
     public void testPrint() {
         CSLL<Integer> list = new CSLL<Integer>(new SNode<Integer>(1));
@@ -285,8 +300,10 @@ public class CSLLTest {
         list.insert(new SNode<Integer>(3), 2);
         list.insert(new SNode<Integer>(4), 2);
 
-        System.out.println("Check Manually");
         list.print();
+        assertEquals(
+                "Circularly Singly Linked List Information: \nList Length: 4\nSort Status: false\nList Values: \n1 2 4 3 ",
+                outputCaptor.toString());
     }
 
 }
