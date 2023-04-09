@@ -3,6 +3,9 @@ package test;
 import main.java.mylib.datastructures.nodes.DNode;
 import main.java.mylib.datastructures.linear.DLL;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.*;
@@ -305,6 +308,19 @@ public class DLLTest {
         assertFalse("List should not be sorted", list.isSorted());
     }
 
+    private final ByteArrayOutputStream outputCaptor = new ByteArrayOutputStream();
+    private final PrintStream standardOut = System.out;
+
+    @Before
+    public void setUp() {
+        System.setOut(new PrintStream(outputCaptor));
+    }
+
+    @After
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+
     @Test
     public void testPrint() {
         DLL<Integer> list = new DLL<Integer>(new DNode<Integer>(1));
@@ -312,8 +328,9 @@ public class DLLTest {
         list.insert(new DNode<Integer>(3), 2);
         list.insert(new DNode<Integer>(4), 2);
 
-        System.out.println("Check Manually");
         list.print();
+        assertEquals("Doubly Linked List Information: \nList Length: 4\nSort Status: false\nList Values: \n1 2 4 3 ",
+                outputCaptor.toString());
     }
 
     @Test
