@@ -1,0 +1,12 @@
+test\CDLLTest.class
+test\SNodeTest.class
+test\CSLLTest.class
+test\DNodeTest.class
+test\AppTest.class
+test\QueueLLTest.class
+test\DLLTest.class
+test\TNodeTest.class
+test\AVLTest.class
+test\BSTTest.class
+test\StackLLTest.class
+test\SLLTest.class
