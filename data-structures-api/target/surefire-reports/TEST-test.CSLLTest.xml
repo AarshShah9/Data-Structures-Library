@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CA"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\aarsh\AppData\Local\Temp\surefire7666514398542070488\surefirebooter-20230409112024748_3.jar C:\Users\aarsh\AppData\Local\Temp\surefire7666514398542070488 2023-04-09T11-20-24_496-jvmRun1 surefire-20230409112024748_1tmp surefire_0-20230409112024748_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\aarsh\AppData\Local\Temp\surefire1127958528824937317\surefirebooter-20230409112753770_3.jar C:\Users\aarsh\AppData\Local\Temp\surefire1127958528824937317 2023-04-09T11-27-53_516-jvmRun1 surefire-20230409112753770_1tmp surefire_0-20230409112753770_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="A:\All_Files_Organized\Coding Projects\School Folders\ENSF-338\338-FinalProject\data-structures-api\target\test-classes;A:\All_Files_Organized\Coding Projects\School Folders\ENSF-338\338-FinalProject\data-structures-api\target\classes;C:\Users\aarsh\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\aarsh\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\aarsh\AppData\Local\Temp\surefire7666514398542070488\surefirebooter-20230409112024748_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\aarsh\AppData\Local\Temp\surefire1127958528824937317\surefirebooter-20230409112753770_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.12+7"/>
@@ -65,7 +65,7 @@
   <testcase name="testPrint" classname="test.CSLLTest" time="0"/>
   <testcase name="testSort" classname="test.CSLLTest" time="0"/>
   <testcase name="testInsertAtPosition" classname="test.CSLLTest" time="0"/>
-  <testcase name="testConstructorWithData" classname="test.CSLLTest" time="0"/>
+  <testcase name="testConstructorWithData" classname="test.CSLLTest" time="0.001"/>
   <testcase name="testGetHead" classname="test.CSLLTest" time="0"/>
   <testcase name="testGetSize" classname="test.CSLLTest" time="0"/>
   <testcase name="testGetTail" classname="test.CSLLTest" time="0"/>
