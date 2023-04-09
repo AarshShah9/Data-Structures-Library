@@ -1,9 +1,5 @@
 package main.java.mylib.datastructures.linear;
 
-import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import main.java.mylib.datastructures.nodes.DNode;
 
 public class DLL<T extends Comparable<T>> {
