@@ -65,6 +65,19 @@ public class QueueLL<T extends Comparable<T>> extends SLL<T> {
     }
 
     @Override
+    public void print() {
+        System.out.print("Data Structure Information:");
+        System.out.print("\nQueue Length: " + this.size);
+        System.out.print("\nQueue Values: ");
+        SNode<T> current = head;
+        while (current != null) {
+            System.out.print(current.getValue() + " ");
+            current = current.getNext();
+        }
+        System.out.print("\n");
+    }
+
+    @Override
     public void insertHead(SNode<T> node) {
     }
 

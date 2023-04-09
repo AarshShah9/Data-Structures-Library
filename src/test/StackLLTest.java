@@ -3,9 +3,12 @@ package test;
 import main.java.mylib.datastructures.nodes.SNode;
 import main.java.mylib.datastructures.linear.StackLL;
 
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class StackLLTest {
     private final ArrayList<Integer> DUMMY_DATA = new ArrayList<Integer>(
@@ -189,4 +192,30 @@ public class StackLLTest {
                 (Integer) 1, stack.peek().getValue());
     }
 
+    private final ByteArrayOutputStream outputCaptor = new ByteArrayOutputStream();
+    private final PrintStream standardOut = System.out;
+
+    @Before
+    public void setUp() {
+        System.setOut(new PrintStream(outputCaptor));
+    }
+
+    @After
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+
+    @Test
+    public void testPrint() {
+        StackLL<Integer> stack = new StackLL<Integer>();
+
+        for (int i = 0; i < 4; i++) {
+            stack.push(new SNode<Integer>(i));
+        }
+
+        stack.print();
+        assertEquals("Printed stack should be 3 2 1 0 ",
+                "Data Structure Information: \nStack Length: 4\nStack Values: 3 2 1 0 \n",
+                outputCaptor.toString());
+    }
 }

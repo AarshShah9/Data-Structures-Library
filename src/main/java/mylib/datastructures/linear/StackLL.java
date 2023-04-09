@@ -74,6 +74,15 @@ public class StackLL<T extends Comparable<T>> extends SLL<T> {
 
     @Override
     public void print() {
+        System.out.print("Data Structure Information: ");
+        System.out.print("\nStack Length: " + this.size);
+        System.out.print("\nStack Values: ");
+        SNode<T> current = head;
+        while (current != null) {
+            System.out.print(current.getValue() + " ");
+            current = current.getNext();
+        }
+        System.out.print("\n");
     }
 
     @Override

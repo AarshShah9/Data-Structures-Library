@@ -3,9 +3,12 @@ package test;
 import main.java.mylib.datastructures.nodes.SNode;
 import main.java.mylib.datastructures.linear.QueueLL;
 
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class QueueLLTest {
     private final ArrayList<Integer> DUMMY_DATA = new ArrayList<Integer>(
@@ -217,5 +220,32 @@ public class QueueLLTest {
         assertEquals("Queue should remain the same", 4, (int) queue.getTail().getValue());
         queue.insert(new SNode<Integer>(7), 0);
         assertEquals("Queue should remain the same", 5, (int) queue.peek().getValue());
+    }
+
+    private final ByteArrayOutputStream outputCaptor = new ByteArrayOutputStream();
+    private final PrintStream standardOut = System.out;
+
+    @Before
+    public void setUp() {
+        System.setOut(new PrintStream(outputCaptor));
+    }
+
+    @After
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+
+    @Test
+    public void testPrint() {
+        QueueLL<Integer> queue = new QueueLL<Integer>();
+
+        for (int i = 0; i < 4; i++) {
+            queue.enqueue(new SNode<Integer>(i));
+        }
+
+        queue.print();
+        assertEquals("Printed queue should be 0 1 2 3 ",
+                "Data Structure Information:\nQueue Length: 4\nQueue Values: 0 1 2 3 \n",
+                outputCaptor.toString());
     }
 }
