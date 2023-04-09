@@ -178,6 +178,7 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
         }
     }
 
+    @Override
     public void sort() {
         sortedHead = null;
         DNode<T> current = head;
@@ -226,6 +227,7 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
         return null;
     }
 
+    @Override
     public void print() {
         System.out.print("Circularly Doubly Linked List Information: \n");
         System.out.print("List Length: " + this.size + "\n");
