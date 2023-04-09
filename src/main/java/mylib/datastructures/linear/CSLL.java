@@ -193,5 +193,16 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
         return null;
     }
 
-    // We dont need to override: print, clear, getHead, getSize, isSorted
+    public void print() {
+        System.out.println("Singly Linked List Information: ");
+        System.out.println("List Length: " + this.size);
+        System.out.println("Sort Status: " + this.sorted);
+        System.out.println("List Values: ");
+        SNode<T> current = head;
+        do {
+            System.out.print(current.getValue() + " ");
+            current = current.getNext();
+        } while (current != head);
+    }
+    // We dont need to override: clear, getHead, getSize, isSorted
 }

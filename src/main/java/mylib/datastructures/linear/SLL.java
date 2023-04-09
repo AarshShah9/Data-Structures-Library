@@ -232,16 +232,15 @@ public class SLL<T extends Comparable<T>> {
     }
 
     public void print() {
-        System.out.print("Data Structure Information: ");
-        System.out.print("List Length: " + this.size);
-        System.out.print("Sort Status: " + this.sorted);
-        System.out.print("List Values: ");
+        System.out.println("Singly Linked List Information: ");
+        System.out.println("List Length: " + this.size);
+        System.out.println("Sort Status: " + this.sorted);
+        System.out.println("List Values: ");
         SNode<T> current = head;
-        while (current != tail) {
+        do {
             System.out.print(current.getValue() + " ");
             current = current.getNext();
-        }
-        System.out.println();
+        } while (current != null);
     }
 
 }

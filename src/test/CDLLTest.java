@@ -333,4 +333,5 @@ public class CDLLTest {
         assertTrue("Doubly linked list is not doubly linked", valid);
         assertEquals("List should be circular", list.getHead(), list.getTail().getNext());
     }
+
 }

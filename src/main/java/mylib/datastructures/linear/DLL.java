@@ -1,5 +1,9 @@
 package main.java.mylib.datastructures.linear;
 
+import static org.junit.Assert.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import main.java.mylib.datastructures.nodes.DNode;
 
 public class DLL<T extends Comparable<T>> {
@@ -214,16 +218,15 @@ public class DLL<T extends Comparable<T>> {
     }
 
     public void print() {
-        System.out.print("Singly Linked List Information: ");
-        System.out.print("List Length: " + size);
-        System.out.print("Sort Status: " + sorted);
-        System.out.print("List Values: ");
+        System.out.println("Doubly Linked List Information: ");
+        System.out.println("List Length: " + size);
+        System.out.println("Sort Status: " + sorted);
+        System.out.println("List Values: ");
         DNode<T> current = head;
-        while (current != tail) {
+        do {
             System.out.print(current.getValue() + " ");
             current = current.getNext();
-        }
-        System.out.println();
+        } while (current != null);
     }
 
 }

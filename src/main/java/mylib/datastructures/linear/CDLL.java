@@ -226,6 +226,18 @@ public class CDLL<T extends Comparable<T>> extends DLL<T> {
         return null;
     }
 
-    // Don't need to overide print, clear, getHead, getTail, getSize,
+    public void print() {
+        System.out.println("Singly Linked List Information: ");
+        System.out.println("List Length: " + this.size);
+        System.out.println("Sort Status: " + this.sorted);
+        System.out.println("List Values: ");
+        DNode<T> current = head;
+        do {
+            System.out.print(current.getValue() + " ");
+            current = current.getNext();
+        } while (current != head);
+    }
+
+    // Don't need to overide clear, getHead, getTail, getSize,
     // isSorted
 }
