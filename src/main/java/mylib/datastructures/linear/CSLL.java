@@ -98,6 +98,7 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
 
     }
 
+    @Override
     public void sortedInsert(SNode<T> node) {
         if (!sorted) {
             sort();
@@ -193,6 +194,7 @@ public class CSLL<T extends Comparable<T>> extends SLL<T> {
         return null;
     }
 
+    @Override
     public void print() {
         System.out.print("Circularly Singly Linked List Information: \n");
         System.out.print("List Length: " + this.size + "\n");
