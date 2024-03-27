@@ -14,4 +14,5 @@
     - Testing
 
 
-This project was built in collaboration with William Fraser.
+This project was built in collaboration with William Fraser. 
+Feel free to look around the codebase!!
